@@ -12,7 +12,6 @@ using Random = UnityEngine.Random;
         [SerializeField] private MouseLook m_MouseLook;
  
 
-
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
@@ -22,6 +21,8 @@ using Random = UnityEngine.Random;
         private Vector3 m_OriginalCameraPosition;
 		private Rigidbody rb;
 
+
+		bool grounded = false;
         // Use this for initialization
         private void Start()
         {
@@ -34,6 +35,8 @@ using Random = UnityEngine.Random;
 
 
         private void Update(){
+
+
             RotateView();
 
 			GetInput();
@@ -43,9 +46,13 @@ using Random = UnityEngine.Random;
 
 			m_MoveDir.x = desiredMove.x*speed*Time.deltaTime;
 			m_MoveDir.z = desiredMove.z*speed*Time.deltaTime;
-
+//		if (!grounded) {
+//			m_MoveDir.y = -Time.deltaTime * 4;
+//		} else {
+//			m_MoveDir.y = 0;
+//			grounded = false;
+//		}
 			transform.position += m_MoveDir;
-			//rb.velocity =m_MoveDir;
         }
        
 
@@ -68,6 +75,15 @@ using Random = UnityEngine.Random;
                 m_Input.Normalize();
             }           
         }
+
+//	void OnCollisionEnter(Collision col){
+//		Debug.Log (col.contacts [0].normal);
+//		if (col.contacts [0].normal == new Vector3 (0, 1, 0)) {
+//			grounded = true;
+//		} else {
+//			grounded = false;
+//		}
+//	}
 
 
         private void RotateView()

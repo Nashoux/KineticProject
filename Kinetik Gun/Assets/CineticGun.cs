@@ -10,10 +10,12 @@ public class CineticGun : MonoBehaviour {
 	LayerMask myMask;
 
 	Quaternion myVectorRot;
+	Rigidbody rb;
 
 	void Start () {
 		//myForces = new BlockMove.Force (new Vector3(1,0,0), new Vector3( transform.rotation.x, transform.rotation.y, transform.rotation.z) , 0.5f);
 		myMask = 5;
+		rb = GetComponent<Rigidbody> ();
 
 		//myMask = ~myMask;
 	}
@@ -73,7 +75,7 @@ public class CineticGun : MonoBehaviour {
 				RaycastHit hit; 
 				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMoving> ())) {
 					Quaternion rotation = transform.rotation;
-
+					rb.useGravity = false;
 					Debug.Log (rotation.eulerAngles);
 
 					transform.SetParent(hit.transform,true);
@@ -85,10 +87,12 @@ public class CineticGun : MonoBehaviour {
 			} else {
 				Quaternion rotation = transform.rotation;
 				transform.SetParent( null, true );
+				rb.useGravity = true;
 
 				RaycastHit hit; 
 				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMoving> ())) {
 					transform.SetParent(hit.transform,true);
+					rb.useGravity = false;
 				
 				}
 			}
