@@ -17,7 +17,6 @@ using Random = UnityEngine.Random;
         private float m_YRotation;
         private Vector2 m_Input;
         private Vector3 m_MoveDir = Vector3.zero;
-//        private CharacterController m_CharacterController;
         private Vector3 m_OriginalCameraPosition;
 		private Rigidbody rb;
 
