@@ -15,8 +15,8 @@ using UnityEngine;
         public bool lockCursor = true;
 
 
-        private Quaternion m_CharacterTargetRot;
-        private Quaternion m_CameraTargetRot;
+	public Quaternion m_CharacterTargetRot;
+	public Quaternion m_CameraTargetRot;
         private bool m_cursorIsLocked = true;
 
         public void Init(Transform character, Transform camera)
@@ -26,7 +26,7 @@ using UnityEngine;
         }
 
 
-        public void LookRotation(Transform character, Transform camera)        {
+        public void LookRotation(Transform character, Transform camera){
 			float yRot = Input.GetAxis("Mouse X") * XSensitivity;
 			float xRot = Input.GetAxis("Mouse Y") * YSensitivity;
 
@@ -52,8 +52,7 @@ using UnityEngine;
             UpdateCursorLock();
         }
 
-        public void SetCursorLock(bool value)
-        {
+        public void SetCursorLock(bool value){
             lockCursor = value;
             if(!lockCursor)
             {//we force unlock the cursor if the user disable the cursor locking helper
@@ -62,8 +61,7 @@ using UnityEngine;
             }
         }
 
-        public void UpdateCursorLock()
-        {
+        public void UpdateCursorLock(){
             //if the user set "lockCursor" we check & properly lock the cursos
             if (lockCursor)
                 InternalLockUpdate();

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CineticGun : MonoBehaviour {
 
+	[SerializeField] private FirstPersonController fpc;
+
 	BlockMove.Force myForces;
 
 	bool stocked = false;
@@ -11,6 +13,7 @@ public class CineticGun : MonoBehaviour {
 
 	Quaternion myVectorRot;
 	Rigidbody rb;
+	public bool isLock = false;
 
 	void Start () {
 		//myForces = new BlockMove.Force (new Vector3(1,0,0), new Vector3( transform.rotation.x, transform.rotation.y, transform.rotation.z) , 0.5f);
@@ -67,42 +70,50 @@ public class CineticGun : MonoBehaviour {
 			}
 		} else if (triger1 < 0.2f) {
 			stocked = false;
-
 		}
 
 		if (Input.GetMouseButtonDown (2)) {
 			if (transform.parent == null) {
 				RaycastHit hit; 
 				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMoving> ())) {
-					Quaternion rotation = transform.rotation;
-					rb.useGravity = false;
-					Debug.Log (rotation.eulerAngles);
+					//rb.useGravity = false;
+					isLock = true;
+					Quaternion rotation = Quaternion.Euler( transform.rotation.eulerAngles);
 
 					transform.SetParent(hit.transform,true);
 
+					rotation = Quaternion.Euler( rotation.eulerAngles -transform.parent.transform.rotation.eulerAngles);
+
+					Debug.Log (rotation.eulerAngles);
+
 					transform.rotation = rotation;
+					fpc.m_MouseLook.m_CharacterTargetRot = Quaternion.identity;
+					fpc.m_MouseLook.m_CharacterTargetRot = rotation;
 					//transform.localRotation = Quaternion.identity;
 				}
 
 			} else {
-				Quaternion rotation = transform.rotation;
+				Quaternion rotation = Quaternion.Euler( transform.rotation.eulerAngles);
 				transform.SetParent( null, true );
-				rb.useGravity = true;
+				isLock = false;
+				fpc.m_MouseLook.m_CharacterTargetRot = Quaternion.identity;
+				fpc.m_MouseLook.m_CharacterTargetRot = rotation;
 
 				RaycastHit hit; 
 				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMoving> ())) {
 					transform.SetParent(hit.transform,true);
-					rb.useGravity = false;
-				
+					rotation = Quaternion.Euler( rotation.eulerAngles - transform.parent.transform.rotation.eulerAngles);
+					isLock = true;
+					fpc.m_MouseLook.m_CharacterTargetRot = Quaternion.identity;
+					fpc.m_MouseLook.m_CharacterTargetRot = rotation;
 				}
 			}
 		}
-
 	}
 
 	void LateUpdate (){
 		
-		//transform.rotation = myVectorRot;
+
 
 		}
 	

@@ -31,3 +31,5 @@ D:\Document\Unity powa\Cinetik Gun\Temp\bin\Debug\UnityEngine.HoloLens.xml
 D:\Document\Unity powa\Cinetik Gun\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 D:\Document\Unity powa\Cinetik Gun\obj\Debug\Assembly-CSharp.dll
 D:\Document\Unity powa\Cinetik Gun\obj\Debug\Assembly-CSharp.pdb
+D:\Document\Unity powa\Kinetic GUN\MyKineticProject\Kinetik Gun\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+D:\Document\Unity powa\Kinetic GUN\MyKineticProject\Kinetik Gun\obj\Debug\Assembly-CSharp.dll

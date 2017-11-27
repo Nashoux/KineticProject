@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
     public class FirstPersonController : MonoBehaviour
     {
 		[SerializeField] private float speed;
-        [SerializeField] private MouseLook m_MouseLook;
- 
+        public MouseLook m_MouseLook;
+
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -21,7 +21,9 @@ using Random = UnityEngine.Random;
 		private Rigidbody rb;
 
 
-		bool grounded = false;
+		public bool grounded = false;
+		[SerializeField] CineticGun myGun;
+
         // Use this for initialization
         private void Start()
         {
@@ -45,12 +47,14 @@ using Random = UnityEngine.Random;
 
 			m_MoveDir.x = desiredMove.x*speed*Time.deltaTime;
 			m_MoveDir.z = desiredMove.z*speed*Time.deltaTime;
-//		if (!grounded) {
-//			m_MoveDir.y = -Time.deltaTime * 4;
-//		} else {
-//			m_MoveDir.y = 0;
-//			grounded = false;
-//		}
+		if ((!grounded && !myGun.isLock) ) {
+			rb.useGravity = true;
+			//m_MoveDir.y = -Time.deltaTime * 4;
+		} else  {
+			//
+			rb.useGravity = false;
+			grounded = false;
+		}
 			transform.position += m_MoveDir;
         }
        
