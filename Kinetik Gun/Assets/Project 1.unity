@@ -17985,8 +17985,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a0dbae5c423a1444fb177a0a2c9982dd, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1628508758}
-  m_LocalRotation: {x: -0, y: -0.86602545, z: -0, w: 0.49999994}
-  m_LocalPosition: {x: 0.38961503, y: -0.7790001, z: 0.52516687}
+  m_LocalRotation: {x: -0, y: -0.7410559, z: -0, w: 0.6714434}
+  m_LocalPosition: {x: 0.38961503, y: -0.837, z: 0.52516687}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1639313212}
@@ -17994,7 +17994,7 @@ Transform:
   - {fileID: 1636574479}
   m_Father: {fileID: 715317961}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -95.643005, z: 0}
 --- !u!1 &963987654
 GameObject:
   m_ObjectHideFlags: 0
@@ -19876,14 +19876,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ec5cf00ca181d45a42ba1870e148c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 15
   m_MouseLook:
     XSensitivity: 2
     YSensitivity: 2
     clampVerticalRotation: 1
     MinimumX: -90
     MaximumX: 90
-    smooth: 1
+    smooth: 0
     smoothTime: 10
     lockCursor: 1
     m_CharacterTargetRot: {x: 0, y: 0, z: 0, w: 0}
@@ -19915,10 +19915,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.640107
   m_Height: 1.626524
   m_Direction: 1
-  m_Center: {x: 0, y: -0.31326175, z: 0}
+  m_Center: {x: 0.14010704, y: -0.31326175, z: 0.000000006517416}
 --- !u!4 &1012100256
 Transform:
   m_ObjectHideFlags: 0
@@ -19946,6 +19946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fpc: {fileID: 1012100253}
   isLock: 0
+  directionVectorSign: {fileID: 1639313211}
 --- !u!1 &1017147223
 GameObject:
   m_ObjectHideFlags: 0
@@ -32623,7 +32624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1639313212}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

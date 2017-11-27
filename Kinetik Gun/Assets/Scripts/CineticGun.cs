@@ -6,7 +6,7 @@ public class CineticGun : MonoBehaviour {
 
 	[SerializeField] private FirstPersonController fpc;
 
-	BlockMove.Force myForces;
+	BlockMove.Force myForce;
 
 	bool stocked = false;
 	LayerMask myMask;
@@ -14,6 +14,8 @@ public class CineticGun : MonoBehaviour {
 	Quaternion myVectorRot;
 	Rigidbody rb;
 	public bool isLock = false;
+
+	[SerializeField] GameObject directionVectorSign;
 
 	void Start () {
 		//myForces = new BlockMove.Force (new Vector3(1,0,0), new Vector3( transform.rotation.x, transform.rotation.y, transform.rotation.z) , 0.5f);
@@ -32,9 +34,9 @@ public class CineticGun : MonoBehaviour {
 			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMoving> ())) {
 			
 				if (hit.collider.GetComponent<BlockMove> ()) {
-					myForces = hit.collider.GetComponent<BlockMove> ().myForce;
+					myForce = hit.collider.GetComponent<BlockMove> ().myForce;
 				} else {
-					myForces = hit.collider.GetComponent<BlockAlreadyMoving> ().myForce;
+					myForce = hit.collider.GetComponent<BlockAlreadyMoving> ().myForce;
 				}			
 			}
 		}
@@ -63,9 +65,9 @@ public class CineticGun : MonoBehaviour {
 			RaycastHit hit; 
 			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && ( hit.collider.GetComponent<BlockMove> () ||  hit.collider.GetComponent<BlockAlreadyMoving>()  )) {
 				if (hit.collider.GetComponent<BlockMove> ()) {
-					hit.collider.GetComponent<BlockMove> ().changeMyForce (myForces);
+					hit.collider.GetComponent<BlockMove> ().changeMyForce (myForce);
 				} else {
-					hit.collider.GetComponent<BlockAlreadyMoving> ().changeMyForce (myForces);
+					hit.collider.GetComponent<BlockAlreadyMoving> ().changeMyForce (myForce);
 				}
 			}
 		} else if (triger1 < 0.2f) {
@@ -109,13 +111,20 @@ public class CineticGun : MonoBehaviour {
 				}
 			}
 		}
+
+		LookRotationSign ();
+
 	}
 
-	void LateUpdate (){
+
+
+
+	public void LookRotationSign(){
 		
 
+		directionVectorSign.transform.rotation =   Quaternion.Euler ( new Vector3 ((-myForce.direction.y )*180,  (-myForce.direction.z )*180, (myForce.direction.x )*180 ));
 
-		}
+	}
 	
 
 
