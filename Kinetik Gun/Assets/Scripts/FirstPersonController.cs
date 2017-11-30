@@ -28,6 +28,7 @@ using Random = UnityEngine.Random;
         private void Start()
         {
 			rb = GetComponent<Rigidbody> ();
+
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
 
@@ -45,8 +46,8 @@ using Random = UnityEngine.Random;
 			Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
 
 
-			m_MoveDir.x = desiredMove.x*speed*Time.deltaTime;
-			m_MoveDir.z = desiredMove.z*speed*Time.deltaTime;
+			m_MoveDir.x = desiredMove.x*speed*Time.deltaTime*85;
+			m_MoveDir.z = desiredMove.z*speed*Time.deltaTime*85;
 		if ((!grounded && !myGun.isLock) ) {
 			rb.useGravity = true;
 			//m_MoveDir.y = -Time.deltaTime * 4;
@@ -55,7 +56,9 @@ using Random = UnityEngine.Random;
 			rb.useGravity = false;
 			grounded = false;
 		}
-			transform.position += m_MoveDir;
+
+		rb.velocity = new Vector3(m_MoveDir.x, rb.velocity.y, m_MoveDir.z );
+			//transform.position += m_MoveDir;
         }
        
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BlockAlreadyMoving : MonoBehaviour {
 
+
+	Quaternion rotationStart;
 	Vector3 positionStart;
 
 	public BlockMove.Force myForce = new BlockMove.Force (new Vector3 (0, 0, 0), new Vector3 (0, 0, 0), 0);
@@ -22,8 +24,11 @@ public class BlockAlreadyMoving : MonoBehaviour {
 	float timerReturn = 5;
 	[SerializeField] float timerReturnBase = 5;
 
+	bool inMouv = false;
+
 	// Use this for initialization
 	void Start () {
+		rotationStart = transform.rotation;
 		positionStart = transform.position;
 	}
 	
@@ -115,7 +120,8 @@ public class BlockAlreadyMoving : MonoBehaviour {
 				
 				transform.position += myForce.direction * myForce.speed * Time.deltaTime;
 				timerReturn += Time.deltaTime;
-			
+				inMouv = false;
+
 			} else {
 				
 				ReturnToStart ();
@@ -123,7 +129,7 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 				if (!goToSpePos1) {
 					if (Vector3.Distance (transform.position, specificPos2) > 0.1f) {
-						myForce = new BlockMove.Force(-Vector3.Normalize( transform.position - specificPos2), new Vector3(0,0,0),speed);
+						myForce = new BlockMove.Force (-Vector3.Normalize (transform.position - specificPos2), new Vector3 (0, 0, 0), speed);
 						transform.position = Vector3.MoveTowards (transform.position, specificPos2, speed * Time.deltaTime);
 					} else {
 						goToSpePos1 = true;
@@ -131,13 +137,32 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 				} else {
 					if (Vector3.Distance (transform.position, specificPos1) > 0.1f) {
-						myForce = new BlockMove.Force(-Vector3.Normalize( transform.position - specificPos1), new Vector3(0,0,0),speed);
+						myForce = new BlockMove.Force (-Vector3.Normalize (transform.position - specificPos1), new Vector3 (0, 0, 0), speed);
 						transform.position = Vector3.MoveTowards (transform.position, specificPos1, speed * Time.deltaTime);
 					} else {
 						goToSpePos1 = false;
 					}
 				}
 			}
+
+
+
+
+
+
+			if ((Vector3.Distance (transform.position, positionStart) > 0.5f || Quaternion.Angle (rotationStart, transform.rotation) > 1) && inMouv) {
+
+				transform.position = Vector3.MoveTowards (transform.position, positionStart, speed);
+				transform.rotation = Quaternion.RotateTowards (transform.rotation, rotationStart, speed * 2);
+
+
+			}
+
+
+
+
+
+
 
 			break;
 
@@ -156,10 +181,10 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 	void ReturnToStart(){
 		if (AllThePlace.Count > 0) {
+			inMouv = true;
 			transform.position = Vector3.MoveTowards (transform.position, AllThePlace [AllThePlace.Count - 1], myForce.speed*Time.deltaTime);
 
 			if (Vector3.Distance (transform.position, AllThePlace [AllThePlace.Count - 1]) < 0.8f) {
-				Debug.Log ("c-2");
 				AllThePlace.RemoveAt (AllThePlace.Count - 1);
 			}
 		}
@@ -178,7 +203,6 @@ public class BlockAlreadyMoving : MonoBehaviour {
 		//transform.rotation = Quaternion.identity;
 
 		//transform.Rotate (_force.orientation);
-
 	}
 
 
