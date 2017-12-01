@@ -29,7 +29,12 @@ public class CineticGun : MonoBehaviour {
 
 		myVectorRot = transform.rotation;
 
-		if (Input.GetKeyDown (KeyCode.Joystick1Button5) || Input.GetMouseButtonDown (1)) {
+
+		//Prendre une force
+
+		float triger2 = Input.GetAxis ("trigger2");
+
+		if (triger2 > 0.2f || Input.GetMouseButtonDown (1)) {
 			RaycastHit hit; 
 			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMoving> ())) {
 			
@@ -58,6 +63,9 @@ public class CineticGun : MonoBehaviour {
 //
 //		}
 
+
+		//donner une force
+
 		float triger1 = Input.GetAxis ("trigger1");
 
 		if ((triger1 > 0.2f || Input.GetMouseButtonDown (0)) && !stocked) {
@@ -74,7 +82,11 @@ public class CineticGun : MonoBehaviour {
 			stocked = false;
 		}
 
-		if (Input.GetMouseButtonDown (2)) {
+
+
+		// Système de lock
+
+		if (Input.GetMouseButtonDown (2) || Input.GetKeyDown(KeyCode.JoystickButton5) ) {
 			if (transform.parent == null) {
 				RaycastHit hit; 
 				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMoving> ())) {
@@ -91,14 +103,14 @@ public class CineticGun : MonoBehaviour {
 					transform.rotation = rotation;
 					fpc.m_MouseLook.m_CharacterTargetRot = Quaternion.identity;
 					fpc.m_MouseLook.m_CharacterTargetRot = rotation;
-					//transform.localRotation = Quaternion.identity;
+					transform.position += new Vector3 (0, 0.001f, 0);
 				}
 
 			} else {
+				
 				Quaternion rotation = Quaternion.Euler( transform.rotation.eulerAngles);
 				transform.SetParent( null, true );
 				isLock = false;
-				fpc.m_MouseLook.m_CharacterTargetRot = Quaternion.identity;
 				fpc.m_MouseLook.m_CharacterTargetRot = rotation;
 
 				RaycastHit hit; 
@@ -106,8 +118,8 @@ public class CineticGun : MonoBehaviour {
 					transform.SetParent(hit.transform,true);
 					rotation = Quaternion.Euler( rotation.eulerAngles - transform.parent.transform.rotation.eulerAngles);
 					isLock = true;
-					fpc.m_MouseLook.m_CharacterTargetRot = Quaternion.identity;
 					fpc.m_MouseLook.m_CharacterTargetRot = rotation;
+					transform.position += new Vector3 (0, 0.001f, 0);
 				}
 			}
 		}
@@ -116,6 +128,17 @@ public class CineticGun : MonoBehaviour {
 
 	}
 
+	void OnCollisionEnter(){
+		delock ();
+	}
+
+
+	void delock(){
+		Quaternion rotation = Quaternion.Euler( transform.rotation.eulerAngles);
+		transform.SetParent( null, true );
+		isLock = false;
+		fpc.m_MouseLook.m_CharacterTargetRot = rotation;
+	}
 
 
 

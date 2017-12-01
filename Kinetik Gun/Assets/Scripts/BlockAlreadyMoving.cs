@@ -143,6 +143,12 @@ public class BlockAlreadyMoving : MonoBehaviour {
 						goToSpePos1 = false;
 					}
 				}
+
+
+
+
+
+
 			}
 
 
@@ -152,7 +158,7 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 			if ((Vector3.Distance (transform.position, positionStart) > 0.5f || Quaternion.Angle (rotationStart, transform.rotation) > 1) && inMouv) {
 
-				transform.position = Vector3.MoveTowards (transform.position, positionStart, speed);
+				transform.position = Vector3.MoveTowards (transform.position, positionStart, Vector3.Distance(transform.position, positionStart)>1 ? Vector3.Distance(transform.position, positionStart)/10 : 1 );
 				transform.rotation = Quaternion.RotateTowards (transform.rotation, rotationStart, speed * 2);
 
 
