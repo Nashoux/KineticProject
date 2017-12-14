@@ -8,7 +8,7 @@ public class ChangeTexToSprite : AssetPostprocessor {
     {
         string lowerCaseAssetPath = assetPath.ToLower ();
 
-        if (lowerCaseAssetPath.IndexOf ("/sprites/") != -1) 
+        if (lowerCaseAssetPath.IndexOf ("/UI/") != -1) 
         {
             TextureImporter textureImporter = (TextureImporter) assetImporter;
             textureImporter.textureType = TextureImporterType.Sprite;
