@@ -579,11 +579,6 @@ Prefab:
     - {fileID: 11400006, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
   m_IsPrefabParent: 0
---- !u!20 &926758877 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 2000000, guid: c6453f8e1f814744d8b94e5a6d1f9942,
-    type: 2}
-  m_PrefabInternal: {fileID: 926758876}
 --- !u!1 &977696775 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 5489e524ebfdbbd4cbe41c26624b98d2, type: 3}
@@ -747,7 +742,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5489e524ebfdbbd4cbe41c26624b98d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -143.3
+      value: -287
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5489e524ebfdbbd4cbe41c26624b98d2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -813,8 +808,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myNewMouv: 12
   speed: 15
-  specificPos1: {x: 0.6, y: -15.7, z: -109.8}
-  specificPos2: {x: 0.6, y: -15.7, z: -171.84}
+  specificPos1: {x: -86.446365, y: 0.028152466, z: -304.13232}
+  specificPos2: {x: 45.6, y: -20.7, z: -279.1}
   timerReturnBase: 5
 --- !u!64 &1371135088
 MeshCollider:
@@ -1264,51 +1259,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1726515542 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100004, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
-  m_PrefabInternal: {fileID: 926758876}
---- !u!114 &1726515545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1726515542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a970acddb8696a4792ca6e022840a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NoiseTexture: {fileID: 2800000, guid: 45ca7cd7d934d6245bb4539f780e4892, type: 3}
-  UseHighPrecisionDepthMap: 0
-  Samples: 3
-  Downsampling: 2
-  Radius: 0.473
-  Intensity: 0.4
-  Distance: 1.45
-  Bias: 0.606
-  LumContribution: 0.47
-  OcclusionColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 1
-  CutoffDistance: 150
-  CutoffFalloff: 50
-  Blur: 1
-  BlurDownsampling: 0
-  BlurPasses: 1
-  BlurBilateralThreshold: 0.1
-  DebugAO: 0
-  m_ShaderSSAO_v2: {fileID: 0}
-  m_ShaderHighPrecisionDepth: {fileID: 0}
-  m_Material_v2: {fileID: 0}
-  m_Camera: {fileID: 926758877}
-  m_RWSCamera: {fileID: 0}
-  m_RTFormat: 14
-  keywords:
-  - SAMPLES_HIGH
-  - HIGH_PRECISION_DEPTHMAP_OFF
 --- !u!1001 &1753176171
 Prefab:
   m_ObjectHideFlags: 0

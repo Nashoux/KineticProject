@@ -14,7 +14,7 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 	[SerializeField] mouvementType myNewMouv = mouvementType.noMouv;
 
-	[SerializeField] float speed = 1;
+	public float speed = 1;
 
 	public Vector3 specificPos1;
 	public Vector3 specificPos2;
