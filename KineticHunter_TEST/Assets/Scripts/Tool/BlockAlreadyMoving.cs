@@ -16,8 +16,8 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 	[SerializeField] float speed = 1;
 
-	[SerializeField] Vector3 specificPos1;
-	[SerializeField] Vector3 specificPos2;
+	public Vector3 specificPos1;
+	public Vector3 specificPos2;
 	bool goToSpePos1 = false;
 
 	List<Vector3> AllThePlace = new List<Vector3> ();
@@ -48,69 +48,69 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x, positionStart.y + 5f, positionStart.z);
+			specificPos2 = new Vector3 (positionStart.x, positionStart.y + 30, positionStart.z);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.xx:
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x+5f, positionStart.y, positionStart.z);
+			specificPos2 = new Vector3 (positionStart.x +30f, positionStart.y, positionStart.z);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.zz:
 
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x, positionStart.y, positionStart.z+5f);
+			specificPos2 = new Vector3 (positionStart.x, positionStart.y, positionStart.z +30);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.xz:
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x+2.5f, positionStart.y, positionStart.z+2.5f);
+			specificPos2 = new Vector3 (positionStart.x+2 +30, positionStart.y, positionStart.z+2 +30);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.zx:
 
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x-2.5f, positionStart.y, positionStart.z+2.5f);
+			specificPos2 = new Vector3 (positionStart.x-2 +30, positionStart.y, positionStart.z+2 +30);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.zxy:
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x+2f, positionStart.y+2f, positionStart.z+2f);
+			specificPos2 = new Vector3 (positionStart.x+25f, positionStart.y+25f, positionStart.z+25f);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.xzy:
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x+2f, positionStart.y+2f, positionStart.z-2f);
+			specificPos2 = new Vector3 (positionStart.x+25f, positionStart.y+25f, positionStart.z-25f);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.zy:
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x, positionStart.y+2.5f, positionStart.z+2.5f);
+			specificPos2 = new Vector3 (positionStart.x, positionStart.y+2 +30, positionStart.z+2 +30);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.yz:
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x, positionStart.y+2.5f, positionStart.z-2.5f);
+			specificPos2 = new Vector3 (positionStart.x, positionStart.y+2 +30, positionStart.z-2 +30);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.xy:
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x+2.5f, positionStart.y-2.5f, positionStart.z);
+			specificPos2 = new Vector3 (positionStart.x+2 +30, positionStart.y-2 +30, positionStart.z);
 			myNewMouv = mouvementType.specific;
 			break;
 
 		case mouvementType.yx:
 			specificPos1 = positionStart;
-			specificPos2 = new Vector3 (positionStart.x-2.5f, positionStart.y+2.5f, positionStart.z);
+			specificPos2 = new Vector3 (positionStart.x-2 +30, positionStart.y+2 +30, positionStart.z);
 			myNewMouv = mouvementType.specific;
 			break;
 
@@ -151,18 +151,12 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 
 
-			if ((Vector3.Distance (transform.position, positionStart) > 0.5f || Quaternion.Angle (rotationStart, transform.rotation) > 1) && inMouv) {
+			if ((Vector3.Distance (transform.position, positionStart) > 0 +30 || Quaternion.Angle (rotationStart, transform.rotation) > 1) && inMouv) {
 
 				transform.position = Vector3.MoveTowards (transform.position, positionStart, Vector3.Distance(transform.position, positionStart)>1 ? Vector3.Distance(transform.position, positionStart)/10 : 1 );
 				transform.rotation = Quaternion.RotateTowards (transform.rotation, rotationStart, speed * 2);
 
-
 			}
-
-
-
-
-
 
 
 			break;
@@ -204,6 +198,12 @@ public class BlockAlreadyMoving : MonoBehaviour {
 		//transform.rotation = Quaternion.identity;
 
 		//transform.Rotate (_force.orientation);
+	}
+
+	
+	void OnDrawGizmos()
+	{
+		Gizmos.DrawLine(specificPos1,specificPos2);
 	}
 
 
