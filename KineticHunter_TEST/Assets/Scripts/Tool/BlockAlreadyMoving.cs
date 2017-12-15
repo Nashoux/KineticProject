@@ -10,9 +10,9 @@ public class BlockAlreadyMoving : MonoBehaviour {
 
 	public BlockMove.Force myForce = new BlockMove.Force (new Vector3 (0, 0, 0), new Vector3 (0, 0, 0), 0);
 
-	enum mouvementType {noMouv, yy, xx, zz, xz, zx, xy, yx, yz, zy, xzy,zxy, specific }
+	public enum mouvementType {noMouv, yy, xx, zz, xz, zx, xy, yx, yz, zy, xzy,zxy, specific }
 
-	[SerializeField] mouvementType myNewMouv = mouvementType.noMouv;
+	public mouvementType myNewMouv = mouvementType.noMouv;
 
 	public float speed = 1;
 
