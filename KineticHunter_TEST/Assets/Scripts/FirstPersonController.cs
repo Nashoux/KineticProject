@@ -22,7 +22,7 @@ using Random = UnityEngine.Random;
 
 
 		public bool grounded = false;
-		[SerializeField] CineticGun myGun;
+		[SerializeField] CineticGunV2 myGun;
 
         // Use this for initialization
         private void Start()
@@ -48,7 +48,7 @@ using Random = UnityEngine.Random;
 
 			m_MoveDir.x = desiredMove.x*speed*Time.deltaTime*85;
 			m_MoveDir.z = desiredMove.z*speed*Time.deltaTime*85;
-		if ((!grounded && !myGun.isLock) ) {
+		if ((!grounded /*&& !myGun.isLock */) ) {
 			rb.useGravity = true;
 			//m_MoveDir.y = -Time.deltaTime * 4;
 		} else  {

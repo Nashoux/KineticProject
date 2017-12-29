@@ -4,11 +4,11 @@ using UnityEditor;
 
 public class ChangeTexToSprite : AssetPostprocessor {
 
-    void OnPostprocessTexture(Texture2D texture)
+    void OnPostprocessTexture(Texture2D texture) //when imported in unity
     {
         string lowerCaseAssetPath = assetPath.ToLower ();
 
-        if (lowerCaseAssetPath.IndexOf ("/UI/") != -1) 
+        if (lowerCaseAssetPath.IndexOf ("/sprites/") != -1)  //is it in the sprite folder
         {
             TextureImporter textureImporter = (TextureImporter) assetImporter;
             textureImporter.textureType = TextureImporterType.Sprite;
@@ -23,7 +23,4 @@ public class ChangeTexToSprite : AssetPostprocessor {
             textureImporter.textureType = TextureImporterType.Default;
         }
     }
-
-
-
 }

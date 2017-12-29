@@ -24,27 +24,30 @@ public class SpawnerPlateforme : ScriptableWizard
     [MenuItem ("My Tools/CreatePlateform")]
     static void CreateWizard()
     {
-        ScriptableWizard.DisplayWizard<SpawnerPlateforme> ("Create Plateform", "Create new", "Update selected");
+        ScriptableWizard.DisplayWizard<SpawnerPlateforme> ("Create Plateform", "Create new");
     }
 
-    void OnWizardCreate()
-    {
-        GameObject myPlateform = new GameObject ();
+    void OnWizardCreate()  {
+        
+        //spawn my plateform and change the transform
+        GameObject myPlateform = new GameObject (); 
 		myPlateform.name = objectName;		
 		myPlateform.transform.localRotation = Quaternion.EulerAngles(baseRotation);
 		myPlateform.transform.position = specPos1;
 		myPlateform.transform.localScale = size;
 		if(GameObject.Find(parentObject)){
-			myPlateform.transform.parent = GameObject.Find(parentObject).transform;
+			myPlateform.transform.parent = GameObject.Find(parentObject).transform; 
 		}
 		
 
-        BlockAlreadyMoving plateformComponent = myPlateform.AddComponent<BlockAlreadyMoving> ();
+        //change the component to move the object
+        BlockAlreadyMoving plateformComponent = myPlateform.AddComponent<BlockAlreadyMoving> (); 
 		plateformComponent.specificPos1 = specPos1;
 		plateformComponent.specificPos2 = specPos2;
 		plateformComponent.speed = speed;
 		plateformComponent.myNewMouv = typeOfMouv;
 
+        //add some more graphic 
 		myPlateform.AddComponent<MeshRenderer>().material = myMat;
 		myPlateform.AddComponent<MeshFilter>().mesh = plateformeMesh;
 
@@ -54,10 +57,8 @@ public class SpawnerPlateforme : ScriptableWizard
        
     }
 
-    void OnWizardOtherButton()
-    {
-        if (Selection.activeTransform != null)
-        {
+    void OnWizardOtherButton(){ //to update a target 
+        if (Selection.activeTransform != null){
             BlockAlreadyMoving plateformComponent = Selection.activeTransform.GetComponent<BlockAlreadyMoving>();
 
             if (plateformComponent != null)
