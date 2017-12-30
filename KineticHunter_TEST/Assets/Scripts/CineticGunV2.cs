@@ -61,7 +61,7 @@ public class CineticGunV2 : MonoBehaviour {
 
 
 
-		//donner une force+
+		//donner une force
 
 		float triger1 = Input.GetAxis ("trigger1");
 
@@ -81,9 +81,35 @@ public class CineticGunV2 : MonoBehaviour {
 		}
 
 
+		//Energize
+
+		//take
+		if (Input.GetKey (KeyCode.Joystick1Button4)) {
+			RaycastHit hit;
+			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
+				if(hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie>=0){
+					hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie -= 3;
+					myEnergie += 3;
+				}
+			}
+		}
+
+		//give
+		if (Input.GetKey (KeyCode.Joystick1Button5)) {
+			RaycastHit hit;
+			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
+				if(myEnergie>=0){
+					hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie += 3;
+					myEnergie -= 3;
+				}
+			}
+		}
+
+
+
 		// Système de lock
 
-		if (Input.GetMouseButtonDown (2) || Input.GetKeyDown(KeyCode.JoystickButton5) ) {
+		if (Input.GetMouseButtonDown (2) || Input.GetKeyDown(KeyCode.JoystickButton9) ) {
 			if (transform.parent == null) {
 				RaycastHit hit; 
 				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
