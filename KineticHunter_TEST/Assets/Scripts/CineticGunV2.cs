@@ -13,6 +13,11 @@ public class CineticGunV2 : MonoBehaviour {
 	bool stocked = false;
 	LayerMask myMask;
 
+	bool energiseGift = false;
+	float energiseGiftTimer = 0.8f;
+	bool energiseTake = false;
+	float energiseTakeTimer = 0.8f;
+
 	Quaternion myVectorRot;
 	Rigidbody rb;
 	public bool isLock = false;
@@ -20,6 +25,8 @@ public class CineticGunV2 : MonoBehaviour {
 	public GameObject[] myDirectionGo = new GameObject[2];
 
 	[SerializeField] GameObject directionVectorSign;
+
+	float lastInputTrigger = 0;
 
 	void Start () {
 		//myForces = new BlockMove.Force (new Vector3(1,0,0), new Vector3( transform.rotation.x, transform.rotation.y, transform.rotation.z) , 0.5f);
@@ -34,6 +41,8 @@ public class CineticGunV2 : MonoBehaviour {
 		myVectorRot = transform.rotation;
 
 
+
+		#region direction
 		//Prendre une force
 
 		float triger2 = Input.GetAxis ("trigger2");
@@ -61,11 +70,9 @@ public class CineticGunV2 : MonoBehaviour {
 
 
 
-		//donner une force
+		//donner une force	
 
-		float triger1 = Input.GetAxis ("trigger1");
-
-		if ((triger1 > 0.2f || Input.GetMouseButtonDown (0)) && !stocked) {
+		if ((  Input.GetKey (KeyCode.Joystick1Button5) || Input.GetMouseButtonDown (0)) && !stocked) {
 			stocked = true;
 			RaycastHit hit;
 			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) &&  hit.collider.GetComponent<BlockAlreadyMovingV2>()  ) {
@@ -76,36 +83,78 @@ public class CineticGunV2 : MonoBehaviour {
 				
 				
 			}
-		} else if (triger1 < 0.2f) {
+		} else {
 			stocked = false;
 		}
+		#endregion
 
-
-		//Energize
-
+		#region Energise
 		//take
+		float triger1 = Input.GetAxis ("trigger1");
+		if ( triger1 > 0.2f ) {
+			RaycastHit hit;
+			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
+
+				if(hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie>=0){
+
+					if (energiseTake && lastInputTrigger <= 0.09f) {
+						myEnergie += hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie;
+						hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie = 0;
+
+					} else {
+						if(lastInputTrigger <= 0.09f){
+							energiseTake = true;
+							energiseTakeTimer = 0.8f;
+						}
+
+						hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie -= 3;
+						myEnergie += 3;
+					}
+
+				}
+			}
+		}
+		if(energiseTakeTimer > 0){
+			energiseTakeTimer -=Time.deltaTime;
+		}else{
+			energiseTake = false;
+		}
+		lastInputTrigger = triger1;
+
+
+	
+
+		//give
 		if (Input.GetKey (KeyCode.Joystick1Button4)) {
 			RaycastHit hit;
 			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
-				if(hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie>=0){
-					hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie -= 3;
-					myEnergie += 3;
+				if(myEnergie>=3){
+
+
+					if (energiseGift && Input.GetKey (KeyCode.Joystick1Button4)) {
+						
+					hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie += myEnergie;
+					myEnergie = 0;
+					} else {
+						if (Input.GetKey (KeyCode.Joystick1Button4)){
+							energiseGift = true;
+							energiseGiftTimer = 0.8f;
+						}
+						hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie += 3;
+						myEnergie -= 3;
+					}
 				}
 			}
 		}
-
-		//give
-		if (Input.GetKey (KeyCode.Joystick1Button5)) {
-			RaycastHit hit;
-			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
-				if(myEnergie>=0){
-					hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie += 3;
-					myEnergie -= 3;
-				}
-			}
+		if(energiseGiftTimer > 0){
+			energiseGiftTimer -=Time.deltaTime;
+		}else{
+			energiseGift = false;
 		}
 
 
+
+		#endregion
 
 		// Système de lock
 
