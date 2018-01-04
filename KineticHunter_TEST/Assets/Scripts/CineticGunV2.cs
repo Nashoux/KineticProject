@@ -110,7 +110,6 @@ public class CineticGunV2 : MonoBehaviour {
 						hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie -= 3;
 						myEnergie += 3;
 					}
-
 				}
 			}
 		}
