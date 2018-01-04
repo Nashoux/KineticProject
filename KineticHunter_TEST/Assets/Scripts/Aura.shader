@@ -4,10 +4,9 @@
 	{
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Color ("Color", Color) = (1,1,1,1)
-		_ColorIntensity ("Aura Color Intensity", Range(0,3)) = 0.5
-		_NormalCheck ("Aura Normal To Check", Range(-1,1)) = 0.5
+		_AuraPower("is the aura important or transp", Range(0,5)) = 1
+		_NormalCheck ("Aura Normal To Check", Range(-1,5)) = 0.5
 		_Size("Aura size", float) = 1.5
-		_AuraPower("is the aura important or transp", float) = 1
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 		_Scale ("Scale", float) = 1
@@ -35,12 +34,7 @@
             #include "UnityCG.cginc"
 			#include "Lighting.cginc"
 
-<<<<<<< HEAD
 			#pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
-=======
-			 #pragma multi_compile_forwardadd nolightmap nodirlightmap nodynlightmap novertexlight
-			 
->>>>>>> 1d8a273189ce6a0e2762b5ea45d9c46f9af6fa1f
             #include "AutoLight.cginc"
 
             struct appdata
@@ -96,11 +90,7 @@
 		Tags
 		{
 			"RenderType"="Opaque"
-<<<<<<< HEAD
-=======
 			"Queue" = "Transparent"
-			
->>>>>>> 1d8a273189ce6a0e2762b5ea45d9c46f9af6fa1f
 		}
 		LOD 200
 
@@ -158,11 +148,7 @@
 			{
 				// sample the texture
 				fixed4 col = _Color;
-<<<<<<< HEAD
-				col.w =  abs(i.normal.x*i.normal.z) * ((i.normal.x > _NormalCheck || i.normal.y > _NormalCheck || i.normal.z > _NormalCheck) ? 0 : _ColorIntensity);
-=======
-				col.w =  abs(i.normal.x*i.normal.z)*_AuraPower;
->>>>>>> 1d8a273189ce6a0e2762b5ea45d9c46f9af6fa1f
+				col.w =  abs(i.normal.x * i.normal.z) * ((i.normal.x > _NormalCheck || i.normal.y > _NormalCheck || i.normal.z > _NormalCheck) ? 0 : _AuraPower);
 				return col;
 			}
 			ENDCG
