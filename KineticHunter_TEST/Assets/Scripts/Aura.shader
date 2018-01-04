@@ -5,6 +5,7 @@
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Color ("Color", Color) = (1,1,1,1)
 		_Size("Aura size", float) = 1.5
+		_AuraPower("is the aura important or transp", float) = 1
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 		_Scale ("Scale", float) = 1
@@ -17,7 +18,7 @@
 		Tags
 		{
 			"RenderType"="Opaque"
-			"Queue" = "Transparent"
+			
 			"LightMode"="ForwardBase"
 
 		}
@@ -33,7 +34,8 @@
             #include "UnityCG.cginc"
 			#include "Lighting.cginc"
 
-			 #pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
+			 #pragma multi_compile_forwardadd nolightmap nodirlightmap nodynlightmap novertexlight
+			 
             #include "AutoLight.cginc"
 
             struct appdata
@@ -66,7 +68,7 @@
                 float nl = max(0, dot(worldNormal, _WorldSpaceLightPos0.xyz));
                 o.diff = nl * _LightColor0.rgb;
                 o.ambient = ShadeSH9(half4(worldNormal,1));
-                TRANSFER_SHADOW(o)
+                TRANSFER_SHADOW(o);
 
                 return o;
             }
@@ -84,10 +86,12 @@
             }
             ENDCG
         }
+		
 
       Tags
 		{
 			"RenderType"="Opaque"
+			"Queue" = "Transparent"
 			
 		}
 		LOD 200
@@ -110,6 +114,7 @@
 			half _Glossiness;
 			half _Metallic;
 			float _Scale, _Speed, _Frequency;
+			float _AuraPower;
 
 				struct appdata
 			{
@@ -143,7 +148,7 @@
 			{
 				// sample the texture
 				fixed4 col = _Color;
-				col.w =  abs(i.normal.x*i.normal.z);
+				col.w =  abs(i.normal.x*i.normal.z)*_AuraPower;
 				return col;
 			}
 			ENDCG
