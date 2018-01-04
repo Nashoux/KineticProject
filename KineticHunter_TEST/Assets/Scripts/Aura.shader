@@ -3,15 +3,22 @@
 	Properties
 	{
 		_MainTex ("Base (RGB)", 2D) = "white" {}
-		_Color ("Color", Color) = (1,1,1,1)
-		_AuraPower("is the aura important or transp", Range(0,5)) = 1
-		_NormalCheck ("Aura Normal To Check", Range(-1,5)) = 0.5
-		_Size("Aura size", float) = 1.5
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
-		_Scale ("Scale", float) = 1
-		_Speed ("Speed", float) = 1
-		_Frequency ("Frequency", float) = 1
+		_Color1 ("Aura 1 Color", Color) = (1,1,1,1)
+		_AuraPower1 ("Aura 1 Transparence", Range(0,5)) = 1
+		_NormalCheck1 ("Aura 1 Normal", Range(-1,5)) = 0.5
+		_Size1("Aura 1 Size", float) = 1.5
+		_Scale1 ("Aura 1 Scale", float) = 1
+		_Speed1 ("Aura 1 Speed", float) = 1
+		_Frequency1 ("Aura 1 Frequency", float) = 1
+		_Color2 ("Aura 2 Color", Color) = (1,1,1,1)
+		_AuraPower2 ("Aura 2 Transparence", Range(0,5)) = 1
+		_NormalCheck2 ("Aura 2 Normal", Range(-1,5)) = 0.5
+		_Size2 ("Aura 2 Size", float) = 1.5
+		_Scale2 ("Aura 2 Scale", float) = 1
+		_Speed2 ("Aura 2 Speed", float) = 1
+		_Frequency2 ("Aura 2 Frequency", float) = 1
 	}
 
 	SubShader
@@ -19,7 +26,6 @@
 		Tags
 		{
 			"RenderType"="Opaque"
-			
 			"LightMode"="ForwardBase"
 		}
 		LOD 200
@@ -105,16 +111,13 @@
 			
 			#include "UnityCG.cginc"
 
-			uniform fixed4 _Color;
-			uniform fixed _ColorIntensity;
-			uniform fixed _NormalCheck;
-			uniform float _Size;
+			uniform fixed4 _Color1;
+			uniform float _AuraPower1;
+			uniform fixed _NormalCheck1;
+			uniform float _Size1;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			half _Glossiness;
-			half _Metallic;
-			float _Scale, _Speed, _Frequency;
-			float _AuraPower;
+			float _Scale1, _Speed1, _Frequency1;
 
 			struct appdata
 			{
@@ -132,13 +135,13 @@
 			
 			v2f vert (appdata v)
 			{
-				half offsetvert2 = v.vertex.x + v.vertex.z; //diagonal waves
-				float value = _Scale * sin(_Time.w * _Speed * _Frequency + offsetvert2 );
+				half offsetvert = v.vertex.x + v.vertex.z; //diagonal waves
+				float value = _Scale1 * sin(_Time.w * _Speed1 * _Frequency1 + offsetvert);
 				v.vertex.y += value; //remove for no waves
 				v.normal.y += value; //remove for no waves
 
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex*_Size);
+				o.vertex = UnityObjectToClipPos(v.vertex * _Size1);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.normal= v.normal.xyz;
 				return o;
@@ -147,8 +150,62 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				// sample the texture
-				fixed4 col = _Color;
-				col.w =  abs(i.normal.x * i.normal.z) * ((i.normal.x > _NormalCheck || i.normal.y > _NormalCheck || i.normal.z > _NormalCheck) ? 0 : _AuraPower);
+				fixed4 col = _Color1;
+				col.w =  abs(i.normal.x * i.normal.z) * ((i.normal.x > _NormalCheck1 || i.normal.y > _NormalCheck1 || i.normal.z > _NormalCheck1) ? 0 : _AuraPower1);
+				return col;
+			}
+			ENDCG
+		}
+		
+		Pass
+		{
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			
+			#include "UnityCG.cginc"
+
+			uniform fixed4 _Color2;
+			uniform float _AuraPower2;
+			uniform fixed _NormalCheck2;
+			uniform float _Size2;
+			sampler2D _MainTex;
+			float4 _MainTex_ST;
+			float _Scale2, _Speed2, _Frequency2;
+
+			struct appdata
+			{
+				float4 vertex : POSITION;
+				float4 normal : NORMAL;
+				float2 uv : TEXCOORD0;
+			};
+
+			struct v2f
+			{
+				float2 uv : TEXCOORD0;
+				float4 vertex : SV_POSITION;
+				float3 normal : NORMAL;
+			};
+			
+			v2f vert (appdata v)
+			{
+				half offsetvert = v.vertex.x + v.vertex.z; //diagonal waves
+				float value = _Scale2 * sin(_Time.w * _Speed2 * _Frequency2 + offsetvert);
+				v.vertex.y += value; //remove for no waves
+				v.normal.y += value; //remove for no waves
+
+				v2f o;
+				o.vertex = UnityObjectToClipPos(v.vertex * _Size2);
+				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				o.normal= v.normal.xyz;
+				return o;
+			}
+			
+			fixed4 frag (v2f i) : SV_Target
+			{
+				// sample the texture
+				fixed4 col = _Color2;
+				col.w =  abs(i.normal.x * i.normal.z) * ((i.normal.x > _NormalCheck2 || i.normal.y > _NormalCheck2 || i.normal.z > _NormalCheck2) ? 0 : _AuraPower2);
 				return col;
 			}
 			ENDCG
