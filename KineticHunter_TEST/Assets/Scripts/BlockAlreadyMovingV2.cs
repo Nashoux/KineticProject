@@ -25,13 +25,13 @@ void Start(){
 
 void Update(){
 
-		if (energie < 0) {
+		if (energie <= 0) {
 			energie = 0;
 		} else if (energie > maxEnergie) {
 			energie = maxEnergie;
 		}
 
-		float energieNew = energie / 45;
+		float energieNew = energie / 20;
 		energieNew= Mathf.Log10 (energieNew)*3;
 
 		myMat.SetFloat("_Size1", energieNew);
