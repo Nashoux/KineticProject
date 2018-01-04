@@ -4,6 +4,8 @@
 	{
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Color ("Color", Color) = (1,1,1,1)
+		_ColorIntensity ("Aura Color Intensity", Range(0,3)) = 0.5
+		_NormalCheck ("Aura Normal To Check", Range(-1,1)) = 0.5
 		_Size("Aura size", float) = 1.5
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
@@ -19,7 +21,6 @@
 			"RenderType"="Opaque"
 			"Queue" = "Transparent"
 			"LightMode"="ForwardBase"
-
 		}
 		LOD 200
 
@@ -33,7 +34,7 @@
             #include "UnityCG.cginc"
 			#include "Lighting.cginc"
 
-			 #pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
+			#pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
             #include "AutoLight.cginc"
 
             struct appdata
@@ -76,7 +77,7 @@
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
 
-				 fixed shadow = SHADOW_ATTENUATION(i);
+				fixed shadow = SHADOW_ATTENUATION(i);
                 fixed3 lighting = i.diff * shadow + i.ambient;
                 col.rgb *= lighting;
 				
@@ -85,10 +86,9 @@
             ENDCG
         }
 
-      Tags
+		Tags
 		{
 			"RenderType"="Opaque"
-			
 		}
 		LOD 200
 
@@ -104,6 +104,8 @@
 			#include "UnityCG.cginc"
 
 			uniform fixed4 _Color;
+			uniform fixed _ColorIntensity;
+			uniform fixed _NormalCheck;
 			uniform float _Size;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
@@ -111,7 +113,7 @@
 			half _Metallic;
 			float _Scale, _Speed, _Frequency;
 
-				struct appdata
+			struct appdata
 			{
 				float4 vertex : POSITION;
 				float4 normal : NORMAL;
@@ -143,7 +145,7 @@
 			{
 				// sample the texture
 				fixed4 col = _Color;
-				col.w =  abs(i.normal.x*i.normal.z);
+				col.w =  abs(i.normal.x*i.normal.z) * ((i.normal.x > _NormalCheck || i.normal.y > _NormalCheck || i.normal.z > _NormalCheck) ? 0 : _ColorIntensity);
 				return col;
 			}
 			ENDCG
