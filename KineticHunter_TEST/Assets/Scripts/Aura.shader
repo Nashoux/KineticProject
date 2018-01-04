@@ -17,13 +17,12 @@
 		Tags
 		{
 			"RenderType"="Opaque"
-			"Queue"="Geometry+1"
-			"ForceNoShadowCasting"="True"
+			"Queue" = "Transparent"
+
 		}
 		LOD 200
 
-		ZWrite Off
-        Blend SrcAlpha OneMinusSrcAlpha
+
 		Pass
         {
             CGPROGRAM
@@ -63,6 +62,16 @@
             }
             ENDCG
         }
+
+      Tags
+		{
+			"RenderType"="Opaque"
+			
+		}
+		LOD 200
+
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{
@@ -117,6 +126,9 @@
 			}
 			ENDCG
 		}
+		UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
 	}
+	
 	FallBack "Diffuse"
+	
 }
