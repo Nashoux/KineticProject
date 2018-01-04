@@ -12,11 +12,14 @@ public Vector3 direction = new Vector3(0,0,0);
 
 Rigidbody rb;
 
+	Material myMat;
+
 
 void Start(){
 
 	direction = Vector3.Normalize(direction);
 	rb = GetComponent<Rigidbody>();
+		myMat = GetComponent<MeshRenderer> ().material;
 }
 
 
@@ -28,6 +31,9 @@ void Update(){
 			energie = maxEnergie;
 		}
 
+		float energieNew = energie / 40;
+
+		myMat.SetFloat("_Size", energieNew);
 	
 Vector3 velocity = direction*Time.deltaTime*energie;
 
@@ -54,12 +60,5 @@ rb.velocity = velocity;
 
 
 	}
-
-
-
-
-
-
-
 
 }
