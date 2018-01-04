@@ -31,9 +31,11 @@ void Update(){
 			energie = maxEnergie;
 		}
 
-		float energieNew = energie / 40;
+		float energieNew = energie / 45;
+		energieNew= Mathf.Log10 (energieNew)*3;
 
-		myMat.SetFloat("_Size", energieNew);
+		myMat.SetFloat("_Size1", energieNew);
+		myMat.SetFloat("_Size2", energieNew*70/100);
 	
 Vector3 velocity = direction*Time.deltaTime*energie;
 

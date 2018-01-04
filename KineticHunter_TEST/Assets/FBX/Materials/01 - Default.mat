@@ -56,28 +56,42 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AuraPower: 2.39
+    - _AuraPower1: 1
+    - _AuraPower2: 1
     - _BumpScale: 1
     - _ColorIntensity: 3
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Frequency: 1
+    - _Frequency1: 1
+    - _Frequency2: 1
     - _GlossMapScale: 1
     - _Glossiness: 1
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _NormalCheck: 5
+    - _NormalCheck1: 0.5
+    - _NormalCheck2: 0.5
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Scale: 1.86
+    - _Scale1: 1
+    - _Scale2: 1
     - _Size: 1.43
+    - _Size1: 1.5
+    - _Size2: 1.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 1.31
+    - _Speed1: 1
+    - _Speed2: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.2352941, g: 0.58864105, b: 1, a: 1}
+    - _Color1: {r: 0.5836397, g: 0.7019777, b: 0.9338235, a: 1}
+    - _Color2: {r: 0.115916945, g: 0.3377579, b: 0.9852941, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
