@@ -91,18 +91,18 @@ public class CineticGunV2 : MonoBehaviour {
 		#region Energise
 		//take
 		float triger1 = Input.GetAxis ("trigger1");
-		if ( triger1 > 0.2f ) {
+		if ( triger1 > 0.2f || Input.GetKey (KeyCode.A) ) {
 			RaycastHit hit;
 			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
 
 				if(hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie>=0){
 
-					if (energiseTake && lastInputTrigger <= 0.09f) {
+					if (energiseTake && (lastInputTrigger <= 0.09f || Input.GetKeyDown (KeyCode.A) )) {
 						myEnergie += hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie;
 						hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie = 0;
 
 					} else {
-						if(lastInputTrigger <= 0.09f){
+						if(lastInputTrigger <= 0.09f || Input.GetKey (KeyCode.A) ){
 							energiseTake = true;
 							energiseTakeTimer = 0.8f;
 						}
@@ -124,18 +124,18 @@ public class CineticGunV2 : MonoBehaviour {
 	
 
 		//give
-		if (Input.GetKey (KeyCode.Joystick1Button4)) {
+		if (Input.GetKey (KeyCode.Joystick1Button4) || Input.GetKey (KeyCode.E)) {
 			RaycastHit hit;
 			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
 				if(myEnergie>=3){
 
 
-					if (energiseGift && Input.GetKeyDown (KeyCode.Joystick1Button4)) {
+					if (energiseGift &&  (Input.GetKeyDown (KeyCode.Joystick1Button4) || Input.GetKeyDown (KeyCode.E))) {
 						
 					hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie += myEnergie;
 					myEnergie = 0;
 					} else {
-						if (Input.GetKey (KeyCode.Joystick1Button4)){
+						if (Input.GetKey (KeyCode.Joystick1Button4) || Input.GetKey (KeyCode.E)){
 							energiseGift = true;
 							energiseGiftTimer = 0.8f;
 						}

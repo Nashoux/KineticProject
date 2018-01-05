@@ -1,4 +1,6 @@
-﻿Shader "Unlit/Aura"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Unlit/Aura"
 {
 	Properties
 	{
@@ -162,7 +164,12 @@
 
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex * _Size1);
-				o.vertex.x += sin(o.vertex.y/2+_Time.w/2);
+
+				  float4 worldPos = mul(unity_ObjectToWorld, v.vertex* _Size1);
+ 				//mess with worldPos.xyz 
+				worldPos.x += sin(worldPos.y/2+_Time.w/2);
+				 o.vertex = mul(UNITY_MATRIX_VP, worldPos);
+
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.normal= v.normal.xyz;
 				return o;
@@ -215,8 +222,13 @@
 				v.normal.y += value; //remove for no waves
 
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex * _Size2);
-				o.vertex.x += sin(o.vertex.y/2+_Time.w/2);
+					o.vertex = UnityObjectToClipPos(v.vertex * _Size2);
+
+				  float4 worldPos = mul(unity_ObjectToWorld, v.vertex* _Size2);
+ 				//mess with worldPos.xyz 
+				worldPos.xz += sin(worldPos.y/2+_Time.w/2);
+				 o.vertex = mul(UNITY_MATRIX_VP, worldPos);
+				 
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.normal= v.normal.xyz;
 				return o;
