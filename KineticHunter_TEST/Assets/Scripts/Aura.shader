@@ -162,6 +162,7 @@
 
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex * _Size1);
+				o.vertex.x += sin(o.vertex.y/2+_Time.w/2);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.normal= v.normal.xyz;
 				return o;
@@ -215,6 +216,7 @@
 
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex * _Size2);
+				o.vertex.x += sin(o.vertex.y/2+_Time.w/2);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.normal= v.normal.xyz;
 				return o;

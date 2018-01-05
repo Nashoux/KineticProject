@@ -57,6 +57,8 @@ Material:
     m_Floats:
     - _AuraPower1: 1
     - _AuraPower2: 1
+    - _BoundsDown: 0
+    - _BoundsUp: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -72,8 +74,8 @@ Material:
     - _NormalCheck2: 0.5
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Scale1: 1
-    - _Scale2: 1
+    - _Scale1: 0.1
+    - _Scale2: 0.07
     - _Size1: 1.5
     - _Size2: 1.5
     - _SmoothnessTextureChannel: 0
