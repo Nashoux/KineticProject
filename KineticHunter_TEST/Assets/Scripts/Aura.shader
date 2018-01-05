@@ -12,7 +12,7 @@
 		_Scale1 ("Aura 1 Scale", float) = 1
 		_Speed1 ("Aura 1 Speed", float) = 1
 		_Frequency1 ("Aura 1 Frequency", float) = 1
-		
+
 		_Color2 ("Aura 2 Color", Color) = (1,1,1,1)
 		_AuraPower2 ("Aura 2 Transparence", Range(0,5)) = 1
 		_NormalCheck2 ("Aura 2 Normal", Range(-1,5)) = 0.5
@@ -22,9 +22,8 @@
 		_Frequency2 ("Aura 2 Frequency", float) = 1
 
 		_ColorFill ( "fillColor", Color ) = (0,0,0,1)
-		_fillPourcent( "pourcent fill", float ) = 0
+		_fillPourcent( "pourcent fill", float ) = -1
 		
-
 	}
 
 	SubShader
@@ -60,6 +59,7 @@
             {
                 float2 uv : TEXCOORD0;
 				SHADOW_COORDS(1) //TEXCOORD1
+				float3 normal : NORMAL;
                 float4 vertex : SV_POSITION;
 				float3 diff : COLOR0;
 				fixed3 ambient : COLOR1;
@@ -67,7 +67,8 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-			float4 _ColorFill; 
+			uniform float4 _ColorFill; 
+			uniform float _fillPourcent;
             
             v2f vert (appdata v)
             {
@@ -76,6 +77,7 @@
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
 				float3 worldNormal = UnityObjectToWorldNormal(v.normal);
+				o.normal= UnityObjectToWorldNormal(v.normal);
 
                 float nl = max(0, dot(worldNormal, _WorldSpaceLightPos0.xyz));
                 o.diff = nl * _LightColor0.rgb;
@@ -87,12 +89,15 @@
             
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
 
 				fixed shadow = SHADOW_ATTENUATION(i);
                 fixed3 lighting = i.diff * shadow + i.ambient;
                 col.rgb *= lighting;
+
+				if(i.normal.y < _fillPourcent){
+					col.rgb = _ColorFill.rgb*lighting;
+				}
 				
                 return col;
             }
