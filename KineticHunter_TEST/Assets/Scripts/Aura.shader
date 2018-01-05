@@ -7,7 +7,6 @@
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 		_Color1 ("Aura 1 Color", Color) = (1,1,1,1)
 		_AuraPower1 ("Aura 1 Transparence", Range(0,5)) = 1
-		_NormalCheck1 ("Aura 1 Normal", Range(-1,5)) = 0.5
 		_Size1("Aura 1 Size", float) = 1.5
 		_Scale1 ("Aura 1 Scale", float) = 1
 		_Speed1 ("Aura 1 Speed", float) = 1
@@ -15,7 +14,6 @@
 
 		_Color2 ("Aura 2 Color", Color) = (1,1,1,1)
 		_AuraPower2 ("Aura 2 Transparence", Range(0,5)) = 1
-		_NormalCheck2 ("Aura 2 Normal", Range(-1,5)) = 0.5
 		_Size2 ("Aura 2 Size", float) = 1.5
 		_Scale2 ("Aura 2 Scale", float) = 1
 		_Speed2 ("Aura 2 Speed", float) = 1
@@ -136,7 +134,6 @@
 
 			uniform fixed4 _Color1;
 			uniform float _AuraPower1;
-			uniform fixed _NormalCheck1;
 			uniform float _Size1;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
@@ -174,7 +171,7 @@
 			{
 				// sample the texture
 				fixed4 col = _Color1;
-				col.w =  abs(i.normal.x * i.normal.z) * ((i.normal.x > _NormalCheck1 || i.normal.y > _NormalCheck1 || i.normal.z > _NormalCheck1) ? 0 : _AuraPower1);
+				col.w =  abs(i.normal.x * i.normal.z) * _AuraPower1;
 				return col;
 			}
 			ENDCG
@@ -190,7 +187,6 @@
 
 			uniform fixed4 _Color2;
 			uniform float _AuraPower2;
-			uniform fixed _NormalCheck2;
 			uniform float _Size2;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
@@ -228,7 +224,7 @@
 			{
 				// sample the texture
 				fixed4 col = _Color2;
-				col.w =  abs(i.normal.x * i.normal.z) * ((i.normal.x > _NormalCheck2 || i.normal.y > _NormalCheck2 || i.normal.z > _NormalCheck2) ? 0 : _AuraPower2);
+				col.w =  abs(i.normal.x * i.normal.z) * _AuraPower2;
 				return col;
 			}
 
