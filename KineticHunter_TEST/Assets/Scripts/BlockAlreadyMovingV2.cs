@@ -36,6 +36,8 @@ void Update(){
 
 		myMat.SetFloat("_Size1", energieNew);
 		myMat.SetFloat("_Size2", energieNew*70/100);
+
+		myMat.SetFloat ("_fillPourcent", energie / maxEnergie * 2 - 1);
 	
 Vector3 velocity = direction*Time.deltaTime*energie;
 

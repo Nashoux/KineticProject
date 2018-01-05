@@ -93,11 +93,14 @@
 
 				fixed shadow = SHADOW_ATTENUATION(i);
                 fixed3 lighting = i.diff * shadow + i.ambient;
-                col.rgb *= lighting;
 
 				if(i.normal.y < _fillPourcent){
-					col.rgb = _ColorFill.rgb*lighting;
-				}
+					col.rgb += _ColorFill.rgb;
+					col.rgb /=2;
+					col.rgb *= lighting;
+				}else{
+                col.rgb *= lighting;
+				}				
 				
                 return col;
             }
