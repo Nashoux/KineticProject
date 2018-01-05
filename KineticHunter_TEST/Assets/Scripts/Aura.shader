@@ -19,6 +19,9 @@
 		_Scale2 ("Aura 2 Scale", float) = 1
 		_Speed2 ("Aura 2 Speed", float) = 1
 		_Frequency2 ("Aura 2 Frequency", float) = 1
+		_ColorFill ( "fillColor", Color ) = (0,0,0,1)
+		
+
 	}
 
 	SubShader
@@ -61,6 +64,7 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+			float4 _ColorFill; 
             
             v2f vert (appdata v)
             {
@@ -208,6 +212,9 @@
 				col.w =  abs(i.normal.x * i.normal.z) * ((i.normal.x > _NormalCheck2 || i.normal.y > _NormalCheck2 || i.normal.z > _NormalCheck2) ? 0 : _AuraPower2);
 				return col;
 			}
+
+
+
 			ENDCG
 		}
 		UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
