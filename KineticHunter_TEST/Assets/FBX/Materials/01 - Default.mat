@@ -58,6 +58,8 @@ Material:
     - _AuraPower: 2.39
     - _AuraPower1: 1
     - _AuraPower2: 1
+    - _BoundsDown: 0
+    - _BoundsUp: 0
     - _BumpScale: 1
     - _ColorIntensity: 3
     - _Cutoff: 0.5
@@ -91,6 +93,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     - _fillPourcent: -0.6
+    - isItFill: 0
     m_Colors:
     - _Color: {r: 0.2352941, g: 0.58864105, b: 1, a: 1}
     - _Color1: {r: 0.5836397, g: 0.7019777, b: 0.9338235, a: 1}
