@@ -12,6 +12,7 @@
 		_Scale1 ("Aura 1 Scale", float) = 1
 		_Speed1 ("Aura 1 Speed", float) = 1
 		_Frequency1 ("Aura 1 Frequency", float) = 1
+		
 		_Color2 ("Aura 2 Color", Color) = (1,1,1,1)
 		_AuraPower2 ("Aura 2 Transparence", Range(0,5)) = 1
 		_NormalCheck2 ("Aura 2 Normal", Range(-1,5)) = 0.5
@@ -19,7 +20,9 @@
 		_Scale2 ("Aura 2 Scale", float) = 1
 		_Speed2 ("Aura 2 Speed", float) = 1
 		_Frequency2 ("Aura 2 Frequency", float) = 1
+
 		_ColorFill ( "fillColor", Color ) = (0,0,0,1)
+		_fillPourcent( "pourcent fill", float ) = 0
 		
 
 	}
