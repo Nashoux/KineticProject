@@ -23,6 +23,8 @@
 
 		_ColorFill ( "fillColor", Color ) = (0,0,0,1)
 		_fillPourcent( "pourcent fill", float ) = -1
+		_BoundsUp( "boundsSize Up", float ) = 0
+		_BoundsDown( "boundsSize Down", float ) = 0
 		
 	}
 
@@ -69,10 +71,15 @@
             float4 _MainTex_ST;
 			uniform float4 _ColorFill; 
 			uniform float _fillPourcent;
-            
+			uniform float _BoundsUp;
+			uniform float _BoundsDown;
+			uniform float _BoundsMiddle;
+			
+            float okay;
             v2f vert (appdata v)
             {
                 v2f o;
+				okay = v.vertex.y;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
@@ -94,7 +101,8 @@
 				fixed shadow = SHADOW_ATTENUATION(i);
                 fixed3 lighting = i.diff * shadow + i.ambient;
 
-				if(i.normal.y < _fillPourcent){
+				if(okay <  _BoundsDown + (_BoundsUp-_BoundsDown)*_fillPourcent ){
+				//if(okay < _fillPourcent ){
 					col.rgb += _ColorFill.rgb;
 					col.rgb /=2;
 					col.rgb *= lighting;

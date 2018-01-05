@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BlockAlreadyMovingV2 : MonoBehaviour {
 
 
@@ -20,6 +21,11 @@ void Start(){
 	direction = Vector3.Normalize(direction);
 	rb = GetComponent<Rigidbody>();
 		myMat = GetComponent<MeshRenderer> ().material;
+		Collider myCol = gameObject.AddComponent<BoxCollider> ();
+		myMat.SetFloat ("_BoundsUp", myCol.bounds.max.y);
+		myMat.SetFloat ("_BoundsDown", myCol.bounds.min.y);
+
+		Destroy (myCol);
 }
 
 
@@ -37,11 +43,11 @@ void Update(){
 		myMat.SetFloat("_Size1", energieNew);
 		myMat.SetFloat("_Size2", energieNew*70/100);
 
-		myMat.SetFloat ("_fillPourcent", energie / maxEnergie * 2 - 1);
+	//	myMat.SetFloat ("_fillPourcent", energie / maxEnergie);
+
+
 	
 Vector3 velocity = direction*Time.deltaTime*energie;
-
-
 
 
 
