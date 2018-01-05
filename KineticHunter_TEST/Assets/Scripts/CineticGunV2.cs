@@ -130,7 +130,7 @@ public class CineticGunV2 : MonoBehaviour {
 				if(myEnergie>=3){
 
 
-					if (energiseGift && Input.GetKey (KeyCode.Joystick1Button4)) {
+					if (energiseGift && Input.GetKeyDown (KeyCode.Joystick1Button4)) {
 						
 					hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie += myEnergie;
 					myEnergie = 0;
@@ -155,6 +155,7 @@ public class CineticGunV2 : MonoBehaviour {
 
 		#endregion
 
+		#region Lock
 		// Système de lock
 
 		if (Input.GetMouseButtonDown (2) || Input.GetKeyDown(KeyCode.JoystickButton9) ) {
@@ -194,6 +195,7 @@ public class CineticGunV2 : MonoBehaviour {
 				}
 			}
 		}
+		#endregion
 
 		LookRotationSign ();
 
