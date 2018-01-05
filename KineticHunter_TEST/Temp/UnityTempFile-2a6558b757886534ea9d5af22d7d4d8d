@@ -5,15 +5,17 @@
 -out:Temp\Assembly-CSharp.dll
 -unsafe
 -r:Library\ScriptAssemblies\Assembly-CSharp-firstpass.dll
--r:"D:/Program Files/Unity 2017/Editor/Data/Managed/UnityEditor.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/Managed/UnityEngine.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/Managed/UnityEditor.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/Managed/UnityEngine.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Common.dll"
 -define:UNITY_5_3_OR_NEWER
 -define:UNITY_5_4_OR_NEWER
 -define:UNITY_5_5_OR_NEWER
@@ -98,7 +100,6 @@
 -define:UNITY_EDITOR_WIN
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
--define:ENABLE_VSTU
 -define:CROSS_PLATFORM_INPUT
 Assets/PostProcessing/Runtime/Attributes/GetSetAttribute.cs
 Assets/PostProcessing/Runtime/Attributes/MinAttribute.cs
@@ -152,9 +153,9 @@ Assets/Scripts/CineticGunV2.cs
 Assets/Scripts/FirstPersonController.cs
 Assets/Scripts/MouseLook.cs
 Assets/Scripts/Old/BlockMove.cs
--r:"D:\Program Files\Unity 2017\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
--r:"D:\Program Files\Unity 2017\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"
--r:"D:\Program Files\Unity 2017\Editor\Data\Mono\lib\mono\unity\UnityScript.dll"
--r:"D:\Program Files\Unity 2017\Editor\Data\Mono\lib\mono\unity\UnityScript.Lang.dll"
--r:"D:\Program Files\Unity 2017\Editor\Data\Mono\lib\mono\unity\Boo.Lang.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\Mono\lib\mono\unity\UnityScript.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\Mono\lib\mono\unity\UnityScript.Lang.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\Mono\lib\mono\unity\Boo.Lang.dll"
 -sdk:unity
