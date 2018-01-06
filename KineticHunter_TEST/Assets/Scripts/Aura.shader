@@ -26,6 +26,8 @@ Shader "Unlit/Aura"
 		_BoundsDown( "boundsSize Down", float ) = 0
 
 		_Wiggle("Wiggle power", float) = 2
+
+		[Enum(Wave,1, NoWave,2)] _IsWaveActive("_IsWaveActive", Float) = 1 
 		
 	}
 
@@ -151,6 +153,7 @@ Shader "Unlit/Aura"
 			uniform float _AuraPower1;
 			uniform float _Size1;
 			uniform float _Wiggle;
+			uniform float _IsWaveActive;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float _Scale1, _Speed1, _Frequency1;
@@ -172,8 +175,10 @@ Shader "Unlit/Aura"
 			{
 				half offsetvert = v.vertex.x + v.vertex.z; //diagonal waves
 				float value = _Scale1 * sin(_Time.w * _Speed1 * _Frequency1 + offsetvert);
-				v.vertex.y += value; //remove for no waves
-				v.normal.y += value; //remove for no waves
+				if (_IsWaveActive == 1){
+					v.vertex.y += value; //remove for no waves
+					v.normal.y += value; //remove for no waves
+				}
 
 				v2f o;
 
@@ -207,6 +212,7 @@ Shader "Unlit/Aura"
 			uniform float _AuraPower2;
 			uniform float _Size2;
 			uniform float _Wiggle;
+			uniform float _IsWaveActive;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float _Scale2, _Speed2, _Frequency2;
@@ -228,8 +234,10 @@ Shader "Unlit/Aura"
 			{
 				half offsetvert = v.vertex.x + v.vertex.z; //diagonal waves
 				float value = _Scale2 * sin(_Time.w * _Speed2 * _Frequency2 + offsetvert);
-				v.vertex.y += value; //remove for no waves
-				v.normal.y += value; //remove for no waves
+				if (_IsWaveActive == 1){
+					v.vertex.y += value; //remove for no waves
+					v.normal.y += value; //remove for no waves
+				}
 
 				v2f o;
 

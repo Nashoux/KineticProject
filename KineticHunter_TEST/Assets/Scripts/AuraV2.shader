@@ -22,6 +22,8 @@
 
 		_ColorFill ( "fillColor", Color ) = (0,0,0,1)
 		_fillPourcent( "pourcent fill", float ) = -1
+
+		[Enum(Wave,1, NoWave,2)] _IsWaveActive("_IsWaveActive", Float) = 1 
 		
 	}
 
@@ -134,6 +136,7 @@
 			uniform float _AuraPower1;
 			uniform fixed _NormalCheck1;
 			uniform float _Size1;
+			uniform float _IsWaveActive;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float _Scale1, _Speed1, _Frequency1;
@@ -156,8 +159,10 @@
 			{
 				half offsetvert = v.vertex.x + v.vertex.z; //diagonal waves
 				float value = _Scale1 * sin(_Time.w * _Speed1 * _Frequency1 + offsetvert);
-				v.vertex.y += value; //remove for no waves
-				v.normal.y += value; //remove for no waves
+				if (_IsWaveActive == 1){
+					v.vertex.y += value; //remove for no waves
+					v.normal.y += value; //remove for no waves
+				}
 
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex * _Size1);
@@ -188,6 +193,7 @@
 			uniform float _AuraPower2;
 			uniform fixed _NormalCheck2;
 			uniform float _Size2;
+			uniform float _IsWaveActive;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float _Scale2, _Speed2, _Frequency2;
@@ -210,8 +216,10 @@
 			{
 				half offsetvert = v.vertex.x + v.vertex.z; //diagonal waves
 				float value = _Scale2 * sin(_Time.w * _Speed2 * _Frequency2 + offsetvert);
-				v.vertex.y += value; //remove for no waves
-				v.normal.y += value; //remove for no waves
+				if (_IsWaveActive == 1){
+					v.vertex.y += value; //remove for no waves
+					v.normal.y += value; //remove for no waves
+				}
 
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex * _Size2);
