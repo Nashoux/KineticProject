@@ -1,4 +1,6 @@
-﻿Shader "Unlit/Aura"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Unlit/Aura"
 {
 	Properties
 	{
@@ -24,6 +26,7 @@
 		_BoundsUp( "boundsSize Up", float ) = 0
 		_BoundsDown( "boundsSize Down", float ) = 0
 		
+		_IsItFill ("no touch", float) = 0
 	}
 
 	SubShader
@@ -72,13 +75,23 @@
 			uniform float _BoundsUp;
 			uniform float _BoundsDown;
 			uniform float _BoundsMiddle;
+
+			float _IsItFill;
 			
-            float okay;
             v2f vert (appdata v)
             {
                 v2f o;
-				okay = v.vertex.y;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+
+				float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
+				if(worldPos.y <  _BoundsDown + (_BoundsUp-_BoundsDown)*_fillPourcent){
+					_IsItFill = 1;
+				}else{
+					_IsItFill = 0;
+				}
+				o.vertex = mul(UNITY_MATRIX_VP, worldPos);
+
+
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
 				float3 worldNormal = UnityObjectToWorldNormal(v.normal);
@@ -99,11 +112,11 @@
 				fixed shadow = SHADOW_ATTENUATION(i);
                 fixed3 lighting = i.diff * shadow + i.ambient;
 
-				if(okay <  _BoundsDown + (_BoundsUp-_BoundsDown)*_fillPourcent ){
-				//if(okay < _fillPourcent ){
+				if( _IsItFill == 1){
 					col.rgb += _ColorFill.rgb;
 					col.rgb /=2;
 					col.rgb *= lighting;
+					col.rgb = float3(0,0,0);
 				}else{
                 col.rgb *= lighting;
 				}				
@@ -162,7 +175,12 @@
 
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex * _Size1);
-				o.vertex.x += sin(o.vertex.y/2+_Time.w/2);
+
+				  float4 worldPos = mul(unity_ObjectToWorld, v.vertex* _Size1);
+ 				//mess with worldPos.xyz 
+				worldPos.x += sin(worldPos.y/2+_Time.w/2);
+				 o.vertex = mul(UNITY_MATRIX_VP, worldPos);
+
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.normal= v.normal.xyz;
 				return o;
@@ -215,8 +233,13 @@
 				v.normal.y += value; //remove for no waves
 
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex * _Size2);
-				o.vertex.x += sin(o.vertex.y/2+_Time.w/2);
+					o.vertex = UnityObjectToClipPos(v.vertex * _Size2);
+
+				  float4 worldPos = mul(unity_ObjectToWorld, v.vertex* _Size2);
+ 				//mess with worldPos.xyz 
+				worldPos.xz += sin(worldPos.y/2+_Time.w/2);
+				 o.vertex = mul(UNITY_MATRIX_VP, worldPos);
+				 
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.normal= v.normal.xyz;
 				return o;

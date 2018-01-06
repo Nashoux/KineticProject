@@ -15,6 +15,8 @@ Rigidbody rb;
 
 	Material myMat;
 
+	float _BoundsUp;
+	float _BoundsDown;
 
 void Start(){
 
@@ -22,14 +24,17 @@ void Start(){
 	rb = GetComponent<Rigidbody>();
 		myMat = GetComponent<MeshRenderer> ().material;
 		Collider myCol = gameObject.AddComponent<BoxCollider> ();
-		myMat.SetFloat ("_BoundsUp", myCol.bounds.max.y);
-		myMat.SetFloat ("_BoundsDown", myCol.bounds.min.y);
+		_BoundsUp = myCol.bounds.max.y;
+		_BoundsDown = myCol.bounds.min.y;
 
 		Destroy (myCol);
 }
 
 
 void Update(){
+
+		myMat.SetFloat ("_BoundsUp", _BoundsUp );
+		myMat.SetFloat ("_BoundsDown", _BoundsDown);
 
 		if (energie <= 0) {
 			energie = 0;
@@ -43,7 +48,7 @@ void Update(){
 		myMat.SetFloat("_Size1", energieNew);
 		myMat.SetFloat("_Size2", energieNew*70/100);
 
-	//	myMat.SetFloat ("_fillPourcent", energie / maxEnergie);
+		myMat.SetFloat ("_fillPourcent", energie / maxEnergie);
 
 
 	
