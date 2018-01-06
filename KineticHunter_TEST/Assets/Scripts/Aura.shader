@@ -116,7 +116,6 @@ Shader "Unlit/Aura"
 					col.rgb += _ColorFill.rgb;
 					col.rgb /=2;
 					col.rgb *= lighting;
-					col.rgb = float3(0,0,0);
 				}else{
                 col.rgb *= lighting;
 				}				
