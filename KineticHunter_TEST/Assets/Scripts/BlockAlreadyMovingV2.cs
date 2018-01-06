@@ -22,12 +22,12 @@ void Start(){
 
 	direction = Vector3.Normalize(direction);
 	rb = GetComponent<Rigidbody>();
-		myMat = GetComponent<MeshRenderer> ().material;
-		Collider myCol = gameObject.AddComponent<BoxCollider> ();
-		_BoundsUp = myCol.bounds.max.y;
-		_BoundsDown = myCol.bounds.min.y;
+	myMat = GetComponent<MeshRenderer> ().material;
+	Collider myCol = gameObject.AddComponent<BoxCollider> ();
+	_BoundsUp = myCol.bounds.max.y;
+	_BoundsDown = myCol.bounds.min.y;
 
-		Destroy (myCol);
+	Destroy (myCol);
 }
 
 
@@ -48,11 +48,11 @@ void Update(){
 		myMat.SetFloat("_Size1", energieNew);
 		myMat.SetFloat("_Size2", energieNew*70/100);
 
-		myMat.SetFloat ("_fillPourcent", energie / maxEnergie);
+		myMat.SetFloat ("_fillPourcent", energie / maxEnergie*2 -1);
 
 
 	
-Vector3 velocity = direction*Time.deltaTime*energie;
+Vector3 velocity = direction * Time.deltaTime * energie;
 
 
 

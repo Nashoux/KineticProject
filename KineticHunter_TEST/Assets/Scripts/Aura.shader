@@ -85,7 +85,7 @@ Shader "Unlit/Aura"
                 v2f o;
 
 				float4 worldPos = mul(unity_ObjectToWorld, v.vertex); //convert to world
-				if(worldPos.y <  _BoundsDown + (_BoundsUp-_BoundsDown)*_fillPourcent){ // if the power change this pixel color or not
+				if(worldPos.y < _BoundsDown + (_BoundsUp - _BoundsDown) * _fillPourcent){ // if the power change this pixel color or not
 					_IsItFill = 1;
 				}else{
 					_IsItFill = 0;
@@ -122,7 +122,7 @@ Shader "Unlit/Aura"
 					col.rgb /=2;
 					col.rgb *= lighting;
 				}else{
-                col.rgb *= lighting;
+                	col.rgb *= lighting;
 				}				
 				
                 return col;
@@ -191,9 +191,9 @@ Shader "Unlit/Aura"
 				return o;
 			}
 			
-			fixed4 frag (v2f i) : SV_Target
+			float4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = _Color1;
+				float4 col = _Color1;
 				col.w =  abs(i.normal.x * i.normal.z) * _AuraPower1;
 				return col;
 			}
@@ -250,9 +250,9 @@ Shader "Unlit/Aura"
 				return o;
 			}
 			
-			fixed4 frag (v2f i) : SV_Target
+			float4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = _Color2;
+				float4 col = _Color2;
 				col.w =  abs(i.normal.x * i.normal.z) * _AuraPower2;
 				return col;
 			}

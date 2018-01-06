@@ -66,7 +66,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _IsWaveActive: 2
+    - _IsWaveActive: 1
     - _Metallic: 0
     - _Mode: 0
     - _NormalCheck1: 1.58

@@ -56,7 +56,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AuraPower: 2.39
-    - _AuraPower1: 1
+    - _AuraPower1: 1.35
     - _AuraPower2: 1
     - _BoundsDown: 0
     - _BoundsUp: 0
@@ -71,6 +71,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 1
     - _GlossyReflections: 1
+    - _IsWaveActive: 1
     - _Metallic: 0
     - _Mode: 0
     - _NormalCheck: 5
@@ -79,18 +80,19 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Scale: 1.86
-    - _Scale1: 1
-    - _Scale2: 1
+    - _Scale1: 0.31
+    - _Scale2: 0.1
     - _Size: 1.43
     - _Size1: 1.5
     - _Size2: 1.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 1.31
-    - _Speed1: 1
+    - _Speed1: 0.22
     - _Speed2: 1
     - _SrcBlend: 1
     - _UVSec: 0
+    - _Wiggle: 2
     - _ZWrite: 1
     - _fillPourcent: -0.6
     - isItFill: 0
