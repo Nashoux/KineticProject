@@ -5,8 +5,7 @@ Shader "Unlit/Aura"
 	Properties
 	{
 		_MainTex ("Base (RGB)", 2D) = "white" {}
-		_Glossiness ("Smoothness", Range(0,1)) = 0.5
-		_Metallic ("Metallic", Range(0,1)) = 0.0
+
 		_Color1 ("Aura 1 Color", Color) = (1,1,1,1)
 		_AuraPower1 ("Aura 1 Transparence", Range(0,5)) = 1
 		_Size1("Aura 1 Size", float) = 1.5
@@ -25,8 +24,9 @@ Shader "Unlit/Aura"
 		_fillPourcent( "pourcent fill", float ) = -1
 		_BoundsUp( "boundsSize Up", float ) = 0
 		_BoundsDown( "boundsSize Down", float ) = 0
+
+		_Wiggle("Wiggle power", float) = 2
 		
-		_IsItFill ("no touch", float) = 0
 	}
 
 	SubShader
@@ -81,22 +81,23 @@ Shader "Unlit/Aura"
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
 
-				float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
-				if(worldPos.y <  _BoundsDown + (_BoundsUp-_BoundsDown)*_fillPourcent){
+				float4 worldPos = mul(unity_ObjectToWorld, v.vertex); //convert to world
+				if(worldPos.y <  _BoundsDown + (_BoundsUp-_BoundsDown)*_fillPourcent){ // if the power change this pixel color or not
 					_IsItFill = 1;
 				}else{
 					_IsItFill = 0;
 				}
-				o.vertex = mul(UNITY_MATRIX_VP, worldPos);
+				o.vertex = mul(UNITY_MATRIX_VP, worldPos);//convert to camera
 
-
+				//color
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
+				//normals
 				float3 worldNormal = UnityObjectToWorldNormal(v.normal);
 				o.normal= UnityObjectToWorldNormal(v.normal);
 
+				//lights
                 float nl = max(0, dot(worldNormal, _WorldSpaceLightPos0.xyz));
                 o.diff = nl * _LightColor0.rgb;
                 o.ambient = ShadeSH9(half4(worldNormal,1));
@@ -107,12 +108,14 @@ Shader "Unlit/Aura"
             
             fixed4 frag (v2f i) : SV_Target
             {
+				//color
                 fixed4 col = tex2D(_MainTex, i.uv);
 
+				//lights
 				fixed shadow = SHADOW_ATTENUATION(i);
                 fixed3 lighting = i.diff * shadow + i.ambient;
 
-				if( _IsItFill == 1){
+				if( _IsItFill == 1){ // if the power change this pixel color
 					col.rgb += _ColorFill.rgb;
 					col.rgb /=2;
 					col.rgb *= lighting;
@@ -147,20 +150,20 @@ Shader "Unlit/Aura"
 			uniform fixed4 _Color1;
 			uniform float _AuraPower1;
 			uniform float _Size1;
+			uniform float _Wiggle;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float _Scale1, _Speed1, _Frequency1;
+			
 
 			struct appdata
 			{
 				float4 vertex : POSITION;
 				float4 normal : NORMAL;
-				float2 uv : TEXCOORD0;
 			};
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
 				float3 normal : NORMAL;
 			};
@@ -173,21 +176,18 @@ Shader "Unlit/Aura"
 				v.normal.y += value; //remove for no waves
 
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex * _Size1);
 
-				  float4 worldPos = mul(unity_ObjectToWorld, v.vertex* _Size1);
- 				//mess with worldPos.xyz 
-				worldPos.x += sin(worldPos.y/2+_Time.w/2);
-				 o.vertex = mul(UNITY_MATRIX_VP, worldPos);
-
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				float4 worldPos = mul(unity_ObjectToWorld, v.vertex* _Size1); //convert to world
+				worldPos.x += sin(worldPos.y/_Wiggle+_Time.w/_Wiggle);
+				o.vertex = mul(UNITY_MATRIX_VP, worldPos); //convert to camera
+				
+				//normal
 				o.normal= v.normal.xyz;
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// sample the texture
 				fixed4 col = _Color1;
 				col.w =  abs(i.normal.x * i.normal.z) * _AuraPower1;
 				return col;
@@ -206,20 +206,20 @@ Shader "Unlit/Aura"
 			uniform fixed4 _Color2;
 			uniform float _AuraPower2;
 			uniform float _Size2;
+			uniform float _Wiggle;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float _Scale2, _Speed2, _Frequency2;
+			
 
 			struct appdata
 			{
 				float4 vertex : POSITION;
 				float4 normal : NORMAL;
-				float2 uv : TEXCOORD0;
 			};
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
 				float3 normal : NORMAL;
 			};
@@ -232,21 +232,18 @@ Shader "Unlit/Aura"
 				v.normal.y += value; //remove for no waves
 
 				v2f o;
-					o.vertex = UnityObjectToClipPos(v.vertex * _Size2);
 
-				  float4 worldPos = mul(unity_ObjectToWorld, v.vertex* _Size2);
- 				//mess with worldPos.xyz 
-				worldPos.xz += sin(worldPos.y/2+_Time.w/2);
-				 o.vertex = mul(UNITY_MATRIX_VP, worldPos);
-				 
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				float4 worldPos = mul(unity_ObjectToWorld, v.vertex* _Size2); //convert to world
+				worldPos.xz += sin(worldPos.y/_Wiggle+_Time.w/_Wiggle); 
+				o.vertex = mul(UNITY_MATRIX_VP, worldPos); //convert to camera
+				
+				//normal
 				o.normal= v.normal.xyz;
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// sample the texture
 				fixed4 col = _Color2;
 				col.w =  abs(i.normal.x * i.normal.z) * _AuraPower2;
 				return col;

@@ -4,32 +4,36 @@
 -langversion:4
 -out:Temp\Assembly-CSharp-Editor.dll
 -unsafe
--r:"D:/Program Files/Unity 2017/Editor/Data/Managed/UnityEditor.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/Managed/UnityEngine.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/Managed/UnityEditor.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/Managed/UnityEngine.dll"
 -r:Library\ScriptAssemblies\Assembly-CSharp-firstpass.dll
 -r:Library\ScriptAssemblies\Assembly-CSharp.dll
 -r:Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/UnityAnalytics/Editor/UnityEditor.Analytics.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/UnityPurchasing/Editor/UnityEditor.Purchasing.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/Managed/UnityEditor.Graphs.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
--r:"D:/Program Files/Unity 2017/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll"
--r:"C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/UnityAnalytics/Editor/UnityEditor.Analytics.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/UnityPurchasing/Editor/UnityEditor.Purchasing.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll"
+-r:"D:/Program Files/unity2017_1_1f1/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Common.dll"
 -define:UNITY_5_3_OR_NEWER
 -define:UNITY_5_4_OR_NEWER
 -define:UNITY_5_5_OR_NEWER
@@ -114,7 +118,6 @@
 -define:UNITY_EDITOR_WIN
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
--define:ENABLE_VSTU
 -define:CROSS_PLATFORM_INPUT
 Assets/Editor/Tool/ChangeTexToSprite.cs
 Assets/Editor/Tool/EditingTrjectory.cs
@@ -154,9 +157,9 @@ Assets/PostProcessing/Editor/Utils/EditorGUIHelper.cs
 Assets/PostProcessing/Editor/Utils/EditorResources.cs
 Assets/PostProcessing/Editor/Utils/FxStyles.cs
 Assets/PostProcessing/Editor/Utils/ReflectionUtils.cs
--r:"D:\Program Files\Unity 2017\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.Runtime.Serialization.dll"
--r:"D:\Program Files\Unity 2017\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.Xml.Linq.dll"
--r:"D:\Program Files\Unity 2017\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\UnityScript.dll"
--r:"D:\Program Files\Unity 2017\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\UnityScript.Lang.dll"
--r:"D:\Program Files\Unity 2017\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\Boo.Lang.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.Runtime.Serialization.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.Xml.Linq.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\UnityScript.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\UnityScript.Lang.dll"
+-r:"D:\Program Files\unity2017_1_1f1\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\Boo.Lang.dll"
 -sdk:2.0
