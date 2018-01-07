@@ -24,6 +24,9 @@ using Random = UnityEngine.Random;
 		public bool grounded = false;
 		[SerializeField] CineticGunV2 myGun;
 
+		[SerializeField] Vector3 newVelocity;
+
+
         // Use this for initialization
         private void Start()
         {
@@ -57,7 +60,11 @@ using Random = UnityEngine.Random;
 			grounded = false;
 		}
 
-		rb.velocity = new Vector3(m_MoveDir.x, rb.velocity.y, m_MoveDir.z );
+		if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space) ){
+			rb.AddForce(0,100,0,ForceMode.Impulse);
+		}
+
+		rb.velocity = new Vector3(m_MoveDir.x+newVelocity.x, rb.velocity.y+newVelocity.y, m_MoveDir.z+newVelocity.z );
 			//transform.position += m_MoveDir;
         }
        
@@ -96,5 +103,24 @@ using Random = UnityEngine.Random;
         {
             m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
+
+	void OnCollisionStay(Collision col){
+
+		if (col.contacts [0].normal.y > -0.1f) {
+			grounded = true;
+		}
+		if (col.gameObject.GetComponent<BlockAlreadyMovingV2> ()) {
+			newVelocity = Vector3.Normalize( col.gameObject.GetComponent<BlockAlreadyMovingV2> ().direction)/1.5f * Time.deltaTime * col.gameObject.GetComponent<BlockAlreadyMovingV2> ().energie;
+		} else {
+			newVelocity = new Vector3 (0, 0, 0);
+		}
+
+	}
+
+	void OnCollisionExit(){
+		newVelocity = new Vector3 (0, 0, 0);
+		grounded = false;
+	}
+
 
 }

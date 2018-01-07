@@ -52,7 +52,7 @@ void Update(){
 
 
 	
-Vector3 velocity = direction * Time.deltaTime * energie;
+		Vector3 velocity = direction * Time.deltaTime * energie;
 
 
 
