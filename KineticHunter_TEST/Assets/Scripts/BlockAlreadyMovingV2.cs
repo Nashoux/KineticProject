@@ -67,10 +67,10 @@ rb.velocity = velocity;
 			if (energie > maxEnergie / 2) {
 
 			}
-		} else if (col.gameObject.GetComponent<CineticGun> ()) {
-
+		} 
+		if (!col.gameObject.GetComponent<CineticGunV2> ()) {
+			direction = col.contacts [0].normal.normalized;
 		}
-
 
 
 
