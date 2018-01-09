@@ -11,8 +11,7 @@ using Random = UnityEngine.Random;
 		[SerializeField] private float speed;
         public MouseLook m_MouseLook;
 
-
-        private Camera m_Camera;
+		private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
         private Vector2 m_Input;
@@ -20,16 +19,14 @@ using Random = UnityEngine.Random;
         private Vector3 m_OriginalCameraPosition;
 		private Rigidbody rb;
 
-
 		public bool grounded = false;
 		[SerializeField] CineticGunV2 myGun;
 
 		[SerializeField] Vector3 newVelocity;
 
-
         // Use this for initialization
-        private void Start()
-        {
+        private void Start(){
+		
 			rb = GetComponent<Rigidbody> ();
 
             m_Camera = Camera.main;
@@ -63,10 +60,14 @@ using Random = UnityEngine.Random;
 		if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space) ){
 			rb.AddForce(0,100,0,ForceMode.Impulse);
 		}
-
-		rb.velocity = new Vector3(m_MoveDir.x+newVelocity.x, rb.velocity.y+newVelocity.y, m_MoveDir.z+newVelocity.z );
-			//transform.position += m_MoveDir;
-        }
+		if(myGun.blockLock != null){
+			rb.useGravity = false;
+			rb.velocity = new Vector3(m_MoveDir.x+newVelocity.x+myGun.blockLock.direction.x*myGun.blockLock.energie*Time.deltaTime, newVelocity.y/100+myGun.blockLock.direction.y*myGun.blockLock.energie*Time.deltaTime, m_MoveDir.z+newVelocity.z +myGun.blockLock.direction.z*myGun.blockLock.energie*Time.deltaTime);
+		}else{
+			rb.useGravity = true;
+			rb.velocity = new Vector3(m_MoveDir.x+newVelocity.x, rb.velocity.y+newVelocity.y/100, m_MoveDir.z+newVelocity.z );   
+		}
+	}
        
 
         private void FixedUpdate(){
@@ -74,7 +75,7 @@ using Random = UnityEngine.Random;
         }
 
 
-        private void GetInput(){			
+        private void GetInput(){
             // Read input
 			float horizontal = Input.GetAxis("Horizontal");
 			float vertical = Input.GetAxis("Vertical");
