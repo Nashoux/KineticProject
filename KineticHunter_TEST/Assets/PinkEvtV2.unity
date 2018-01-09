@@ -3396,7 +3396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energie: 50
-  direction: {x: 0, y: 0.6, z: 0.6}
+  direction: {x: -0.13723752, y: 1.6220604, z: -3.6537771}
 --- !u!64 &456844330
 MeshCollider:
   m_ObjectHideFlags: 0
