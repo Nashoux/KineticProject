@@ -165,7 +165,7 @@ public class CineticGunV2 : MonoBehaviour {
 				blockLock = null;
 
 				RaycastHit hit; 
-				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMovingV2> ())) {
+				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) &&  hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
 					blockLock = hit.collider.GetComponent<BlockAlreadyMovingV2> ();
 				}
 			}

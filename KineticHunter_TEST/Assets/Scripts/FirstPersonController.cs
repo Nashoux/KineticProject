@@ -11,8 +11,7 @@ using Random = UnityEngine.Random;
 		[SerializeField] private float speed;
         public MouseLook m_MouseLook;
 
-
-        private Camera m_Camera;
+		private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
         private Vector2 m_Input;
