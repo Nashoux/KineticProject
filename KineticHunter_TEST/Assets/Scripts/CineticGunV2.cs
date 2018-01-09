@@ -18,10 +18,7 @@ public class CineticGunV2 : MonoBehaviour {
 	bool energiseTake = false;
 	float energiseTakeTimer = 0.8f;
 
-	Quaternion myVectorRot;
-	Rigidbody rb;
-	public bool isLock = false;
-
+	public BlockAlreadyMovingV2 blockLock;
 	public GameObject[] myDirectionGo = new GameObject[2];
 
 	[SerializeField] GameObject directionVectorSign;
@@ -31,14 +28,12 @@ public class CineticGunV2 : MonoBehaviour {
 	void Start () {
 		//myForces = new BlockMove.Force (new Vector3(1,0,0), new Vector3( transform.rotation.x, transform.rotation.y, transform.rotation.z) , 0.5f);
 		myMask = 5;
-		rb = GetComponent<Rigidbody> ();
 
 		//myMask = ~myMask;
 	}
 	
 	void Update ()	{
 
-		myVectorRot = transform.rotation;
 
 
 
@@ -66,7 +61,6 @@ public class CineticGunV2 : MonoBehaviour {
 				myDirectionGo [1].transform.parent = transform.GetChild (0).transform;
 			}
 		}
-
 
 
 
@@ -159,39 +153,20 @@ public class CineticGunV2 : MonoBehaviour {
 		// Système de lock
 
 		if (Input.GetMouseButtonDown (2) || Input.GetKeyDown(KeyCode.JoystickButton9) ) {
-			if (transform.parent == null) {
+			if (blockLock == null) {
 				RaycastHit hit; 
 				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
 					//rb.useGravity = false;
-					isLock = true;
-					Quaternion rotation = Quaternion.Euler( transform.rotation.eulerAngles);
-
-					transform.SetParent(hit.transform,true);
-
-					rotation = Quaternion.Euler( rotation.eulerAngles -transform.parent.transform.rotation.eulerAngles);
-
-					Debug.Log (rotation.eulerAngles);
-
-					transform.rotation = rotation;
-					fpc.m_MouseLook.m_CharacterTargetRot = Quaternion.identity;
-					fpc.m_MouseLook.m_CharacterTargetRot = rotation;
-					transform.position += new Vector3 (0, 0.001f, 0);
+					blockLock = hit.collider.GetComponent<BlockAlreadyMovingV2> ();
 				}
 
 			} else {
 				
-				Quaternion rotation = Quaternion.Euler( transform.rotation.eulerAngles);
-				transform.SetParent( null, true );
-				isLock = false;
-				fpc.m_MouseLook.m_CharacterTargetRot = rotation;
+				blockLock = null;
 
 				RaycastHit hit; 
 				if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && (hit.collider.GetComponent<BlockMove> () || hit.collider.GetComponent<BlockAlreadyMovingV2> ())) {
-					transform.SetParent(hit.transform,true);
-					rotation = Quaternion.Euler( rotation.eulerAngles - transform.parent.transform.rotation.eulerAngles);
-					isLock = true;
-					fpc.m_MouseLook.m_CharacterTargetRot = rotation;
-					transform.position += new Vector3 (0, 0.001f, 0);
+					blockLock = hit.collider.GetComponent<BlockAlreadyMovingV2> ();
 				}
 			}
 		}
@@ -207,10 +182,7 @@ public class CineticGunV2 : MonoBehaviour {
 
 
 	void delock(){
-		Quaternion rotation = Quaternion.Euler( transform.rotation.eulerAngles);
-		transform.SetParent( null, true );
-		isLock = false;
-		fpc.m_MouseLook.m_CharacterTargetRot = rotation;
+		blockLock = null;
 	}
 
 

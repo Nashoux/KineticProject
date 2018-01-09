@@ -2020,7 +2020,7 @@ MonoBehaviour:
   myGameObbject: {fileID: 1966223535011822, guid: 75e4a6fd2002c454fbec3af907ded6ad,
     type: 2}
   fpc: {fileID: 277333072}
-  isLock: 0
+  blockLock: {fileID: 0}
   myDirectionGo:
   - {fileID: 0}
   - {fileID: 0}
@@ -2044,7 +2044,7 @@ MonoBehaviour:
     MinimumX: -90
     MaximumX: 90
     smooth: 0
-    smoothTime: 5
+    smoothTime: 0.6
     lockCursor: 1
     m_CharacterTargetRot: {x: 0, y: 0, z: 0, w: 0}
     m_CameraTargetRot: {x: 0, y: 0, z: 0, w: 0}
@@ -6293,7 +6293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energie: 50
-  direction: {x: 0, y: 0, z: 1}
+  direction: {x: -0.75076437, y: -0.009231585, z: -3.9289014}
 --- !u!64 &925762335
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7853,15 +7853,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 5489e524ebfdbbd4cbe41c26624b98d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -213.67
+      value: -213.90488
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5489e524ebfdbbd4cbe41c26624b98d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -25.119999
+      value: -23.502304
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5489e524ebfdbbd4cbe41c26624b98d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -333.9
+      value: -337.18
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5489e524ebfdbbd4cbe41c26624b98d2, type: 3}
       propertyPath: m_LocalRotation.x
