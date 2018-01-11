@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CineticGunV2 : MonoBehaviour {
 
+	[SerializeField] GameObject ParticulesAspiration;
+
 	[SerializeField] GameObject myGameObbject;
 
 	[SerializeField] private FirstPersonController fpc;
@@ -22,6 +24,8 @@ public class CineticGunV2 : MonoBehaviour {
 	public GameObject[] myDirectionGo = new GameObject[2];
 
 	[SerializeField] GameObject directionVectorSign;
+
+	GameObject lastParticuleAspiration;
 
 	float lastInputTrigger = 0;
 
@@ -80,23 +84,31 @@ public class CineticGunV2 : MonoBehaviour {
 
 		#region Energise
 		//take
+		bool isTackingEnergie = false;
+		RaycastHit energiseHit;
 		if ( Input.GetKey (KeyCode.Joystick1Button4)|| Input.GetKey (KeyCode.A) ) {
-			RaycastHit hit;
-			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out hit, Mathf.Infinity, myMask) && hit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
+			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out energiseHit, Mathf.Infinity, myMask) && energiseHit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
 
-				if(hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie>=0){
+				if(energiseHit.collider.GetComponent<BlockAlreadyMovingV2> ().energie>0){
 
 					if (energiseTake && ( Input.GetKeyDown (KeyCode.Joystick1Button4) || Input.GetKeyDown (KeyCode.A) )) {
-						myEnergie += hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie;
-						hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie = 0;
-
+						myEnergie += energiseHit.collider.GetComponent<BlockAlreadyMovingV2> ().energie;
+						energiseHit.collider.GetComponent<BlockAlreadyMovingV2> ().energie = 0;
+						lastParticuleAspiration.GetComponent<ParticleSystem>().Emit((int)myEnergie/3);
+						isTackingEnergie = false;
 					} else {
-						if(Input.GetKeyDown (KeyCode.Joystick1Button4)|| Input.GetKey (KeyCode.A) ){
+						if(Input.GetKeyDown (KeyCode.Joystick1Button4)|| Input.GetKeyDown (KeyCode.A) ){
+
+							lastParticuleAspiration = Instantiate<GameObject>(ParticulesAspiration);
+							lastParticuleAspiration.GetComponent<particleAttractorLinear>().target = this.transform;
+							lastParticuleAspiration.transform.parent = energiseHit.collider.transform;
+							lastParticuleAspiration.transform.position = energiseHit.collider.transform.position;
+
 							energiseTake = true;
 							energiseTakeTimer = 0.8f;
 						}
-
-						hit.collider.GetComponent<BlockAlreadyMovingV2> ().energie -= 3;
+						isTackingEnergie = true;
+						energiseHit.collider.GetComponent<BlockAlreadyMovingV2> ().energie -= 3;
 						myEnergie += 3;
 					}
 				}
@@ -106,6 +118,12 @@ public class CineticGunV2 : MonoBehaviour {
 			energiseTakeTimer -=Time.deltaTime;
 		}else{
 			energiseTake = false;
+		}
+		if(isTackingEnergie == false && lastParticuleAspiration != null){
+			Debug.Log("a");
+			lastParticuleAspiration.GetComponent<ParticleSystem>().Stop();
+			Destroy(lastParticuleAspiration.gameObject,10);
+
 		}
 
 
