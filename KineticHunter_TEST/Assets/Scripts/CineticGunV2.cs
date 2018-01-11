@@ -11,7 +11,7 @@ public class CineticGunV2 : MonoBehaviour {
 	[SerializeField] private FirstPersonController fpc;
 
 	float myEnergie = 0;
-
+	[SerializeField] float myEnergieMax = 200;
 	bool stocked = false;
 	LayerMask myMask;
 
@@ -85,9 +85,9 @@ public class CineticGunV2 : MonoBehaviour {
 		#region Energise
 		//take
 		bool isTackingEnergie = false;
-		RaycastHit energiseHit;
 		if ( Input.GetKey (KeyCode.Joystick1Button4)|| Input.GetKey (KeyCode.A) ) {
-			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out energiseHit, Mathf.Infinity, myMask) && energiseHit.collider.GetComponent<BlockAlreadyMovingV2> ()) {
+			RaycastHit energiseHit;
+			if (Physics.Raycast (transform.position, Camera.main.transform.TransformDirection (Vector3.forward), out energiseHit, Mathf.Infinity, myMask) && energiseHit.collider.GetComponent<BlockAlreadyMovingV2> () && myEnergie < myEnergieMax) {
 
 				if(energiseHit.collider.GetComponent<BlockAlreadyMovingV2> ().energie>0){
 
@@ -120,15 +120,11 @@ public class CineticGunV2 : MonoBehaviour {
 			energiseTake = false;
 		}
 		if(isTackingEnergie == false && lastParticuleAspiration != null){
-			Debug.Log("a");
 			lastParticuleAspiration.GetComponent<ParticleSystem>().Stop();
 			Destroy(lastParticuleAspiration.gameObject,10);
 
 		}
-
-
-
-	
+			
 
 		//give
 		float triger1 = Input.GetAxis ("trigger1");

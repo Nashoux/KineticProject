@@ -38,8 +38,6 @@ void Update(){
 
 		if (energie <= 0) {
 			energie = 0;
-		} else if (energie > maxEnergie) {
-			energie = maxEnergie;
 		}
 
 		float energieNew = energie / 20;

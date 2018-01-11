@@ -8,16 +8,18 @@ using Random = UnityEngine.Random;
 	[RequireComponent(typeof (Rigidbody))]
     public class FirstPersonController : MonoBehaviour
     {
-		[SerializeField] private float speed;
-        public MouseLook m_MouseLook;
+	[SerializeField] private float speed;
+    public MouseLook m_MouseLook;
+		
+	[SerializeField] float jumpSpeed = 120f;
+	private Camera m_Camera;
+	private bool m_Jump = false;
+    private float m_YRotation;
+    private Vector2 m_Input;
+    private Vector3 m_MoveDir = Vector3.zero;
+    private Vector3 m_OriginalCameraPosition;
+	private Rigidbody rb;
 
-		private Camera m_Camera;
-        private bool m_Jump;
-        private float m_YRotation;
-        private Vector2 m_Input;
-        private Vector3 m_MoveDir = Vector3.zero;
-        private Vector3 m_OriginalCameraPosition;
-		private Rigidbody rb;
 
 		public bool grounded = false;
 		[SerializeField] CineticGunV2 myGun;
@@ -56,9 +58,14 @@ using Random = UnityEngine.Random;
 			rb.useGravity = false;
 			grounded = false;
 		}
+		if (myGun.blockLock != null) {
+			m_MoveDir = new Vector3 (0, 0, 0);
+		}
 
-		if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space) ){
-			rb.AddForce(0,100,0,ForceMode.Impulse);
+		if ((Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space)) && !m_Jump ){
+			m_Jump = true;
+			transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+			rb.AddForce(0,jumpSpeed,0,ForceMode.Impulse);
 		}
 		if(myGun.blockLock != null){
 			rb.useGravity = false;
@@ -108,6 +115,7 @@ using Random = UnityEngine.Random;
 	void OnCollisionStay(Collision col){
 
 		if (col.contacts [0].normal.y > -0.1f) {
+			m_Jump = false;
 			grounded = true;
 		}
 		if (col.gameObject.GetComponent<BlockAlreadyMovingV2> ()) {
