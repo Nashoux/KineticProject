@@ -20,7 +20,7 @@ public class SelectObject : ScriptableWizard
     {
         GameObject[] gameObjectsTag = GameObject.FindGameObjectsWithTag (searchTag);
 
-        List<GameObject> objectName = new List<GameObject>(); //not functinnal
+      //  List<GameObject> objectName = new List<GameObject>(); //not functinnal
         switch (searchByComponent){
             case (myComponent.AlreadyMove) :        
         break;

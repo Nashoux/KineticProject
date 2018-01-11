@@ -81,7 +81,7 @@ Material:
     - _Parallax: 0.02
     - _Scale: 1.86
     - _Scale1: 0.31
-    - _Scale2: 0.1
+    - _Scale2: -6.4
     - _Size: 1.43
     - _Size1: 1.5
     - _Size2: 1.5
@@ -94,11 +94,11 @@ Material:
     - _UVSec: 0
     - _Wiggle: 2
     - _ZWrite: 1
-    - _fillPourcent: -0.6
+    - _fillPourcent: 0.5
     - isItFill: 0
     m_Colors:
     - _Color: {r: 0.2352941, g: 0.58864105, b: 1, a: 1}
-    - _Color1: {r: 0.5836397, g: 0.7019777, b: 0.9338235, a: 1}
-    - _Color2: {r: 0.115916945, g: 0.3377579, b: 0.9852941, a: 1}
+    - _Color1: {r: 0.9705882, g: 0, b: 0, a: 1}
+    - _Color2: {r: 0.9852941, g: 0.115916945, b: 0.88936317, a: 1}
     - _ColorFill: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
